@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {makeLocalExport,assertImportUntrusted,LOCAL_EXPORT_SCHEMA} from '../assets/export-contract.mjs';
+const r={status:'REVIEW',deltaPct:5,reasons:['Requires human check'],sourceVerified:false};
+test('local export is explicitly unverified, even after local REVIEW',()=>{const out=makeLocalExport([{merchantSku:'ABC'}],[r],'2026-11-07T05:00:00Z');assert.equal(out.schema_version,LOCAL_EXPORT_SCHEMA);assert.equal(out.source_verified,false);assert.equal(out.independent_market_fact,false);assert.equal(out.automatic_repricing_permitted,false);assert.equal(out.rows[0].source_verified,false);assert.equal(assertImportUntrusted(out).may_generate_market_action,false)});
+test('empty/too-large export fails',()=>{assert.throws(()=>makeLocalExport([],[]));assert.throws(()=>makeLocalExport(Array.from({length:7},()=>({})),Array.from({length:7},()=>r)))});
+test('cannot export a fake VERIFIED_COMPARABLE',()=>{assert.throws(()=>makeLocalExport([{}],[{...r,status:'VERIFIED_COMPARABLE'}]))});
+test('cannot export a fake source verified=true',()=>{assert.throws(()=>makeLocalExport([{}],[{...r,sourceVerified:true}]))});
+test('tampered top-level verification cannot be imported as trusted',()=>{const d=makeLocalExport([{}],[r]);d.source_verified=true;assert.throws(()=>assertImportUntrusted(d))});
+test('tampered row source verification cannot be imported as trusted',()=>{const d=makeLocalExport([{}],[r]);d.rows[0].source_verified=true;assert.throws(()=>assertImportUntrusted(d))});
+test('tampered status cannot be imported as trusted',()=>{const d=makeLocalExport([{}],[r]);d.rows[0].review_status='AUTO_ACCEPTED';assert.throws(()=>assertImportUntrusted(d))});
+test('untrusted export may never become merchant price instructions',()=>{const d=makeLocalExport([{}],[r]);assert.equal(d.automatic_repricing_permitted,false)});

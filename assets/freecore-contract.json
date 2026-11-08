@@ -1,0 +1,63 @@
+{
+  "schema": "PRICEBRIEFS_FREECORE_E1_PREVIEW_20261107",
+  "release_status": "LOCAL_E1_PREVIEW_NOT_PUBLIC_NOT_CUSTOMER_OPEN",
+  "source": "MIKE owner scoped E1 implementation, Founder 2026-11-07 PriceBriefs free core",
+  "core": {
+    "amount": 0,
+    "currency": "USD",
+    "card_required": false,
+    "accounts_required": false,
+    "model_calls_required": false,
+    "browser_only": true,
+    "scope": {
+      "products": 3,
+      "competitor_observations_per_product": 2,
+      "recency_hours": 24
+    },
+    "current_capabilities": [
+      "manual_entry",
+      "exact_match_gate",
+      "category_variant_gate",
+      "stock_status_gate",
+      "freshness_gate",
+      "public_https_url_syntax_gate",
+      "local_json_export"
+    ],
+    "not_capable": [
+      "live_crawling",
+      "source_content_verification",
+      "continuous_monitoring",
+      "automatic_repricing",
+      "hosted_accounts",
+      "remote_storage"
+    ]
+  },
+  "optional_outcomes": {
+    "status": "NOT_FOR_SALE",
+    "categories": [
+      "AI-assisted evidence review",
+      "human-managed source-conflict adjudication"
+    ],
+    "billing": "Separate approved scope and acceptance",
+    "pricing": "TBD, not invented",
+    "AI_usage": "Not run without opt-in, cost cap and human approval",
+    "data_usage": "Never monetize merchant inputs by default"
+  },
+  "privacy": {
+    "uploads": false,
+    "analytics": false,
+    "tracking": false,
+    "third_party_calls": false,
+    "optional_future_aggregate_contribution": "NOT_IMPLEMENTED_REQUIRES_INFORMED_OPT_IN"
+  },
+  "operations": {
+    "stripe_current_live_price_29_usd_month": "NOT_CHANGED",
+    "production_site": "NOT_CHANGED",
+    "launch_gate": "E4 Founder exact publication + PCI/privacy/cost/user-value QA"
+  },
+  "acceptance": {
+    "cash": "NOT_VERIFIED",
+    "paid_buyers": "NOT_VERIFIED",
+    "free_core_first_user": "NOT_VERIFIED"
+  }
+}
