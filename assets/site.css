@@ -7,3 +7,11 @@
 /* PriceBriefs V2 local-only CSV intake; no hosted upload */
 .csv-input{width:100%;min-height:160px;padding:15px;border:1px solid #a6bbb5;border-radius:12px;background:#fff;color:var(--ink);font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto;resize:vertical;white-space:pre;}
 .csv-input:focus-visible{outline:3px solid #286b66;outline-offset:3px}#csv-workflow summary{list-style-position:inside}#csv-workflow .field{margin-top:17px}#csv-workflow .form-actions{margin-bottom:12px}
+/* MIKE visual provenance label 20261123: unverified user inputs */
+.unverified-label{display:inline-block;margin:0 .25rem .25rem 0;padding:.12rem .4rem;border:1px solid #8c6325;border-radius:999px;background:#fff3d7;color:#67420a;font-weight:800;font-size:.75em;letter-spacing:.015em;}
+
+/* MIKE PB 320px grid min-content fix 20261123 */
+@media(max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}.grid2>.card{min-width:0;overflow-wrap:anywhere}}
+
+/* MIKE hidden-control integrity 20261123: author display styles must not expose unready controls */
+[hidden]{display:none !important}

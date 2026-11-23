@@ -29,7 +29,7 @@ test('all eight pages use external local script files only, no inline JS or even
   const h=read(p);
   const tags=h.match(/<script\b[^>]*>/gi)||[];
   for(const script of tags){
-   assert.match(script,/src="\/assets\/[\w.-]+"/,p);
+   assert.match(script,/src="\/assets\/[\w.-]+(?:\?v=\d{8}-[a-z0-9]+)?"/,p);
    assert.doesNotMatch(script,/https?:\/\//i,p);
   }
   assert.doesNotMatch(h,/\s(?:onload|onclick|onerror|onmouseover|onfocus)\s*=/i,p);
