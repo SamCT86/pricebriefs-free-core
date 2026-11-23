@@ -7,9 +7,9 @@ export function makeLocalExport(rows,results,exportedAt=new Date().toISOString()
     const result=results[i];
     if(!['HOLD','REVIEW'].includes(result?.status)||result?.sourceVerified!==false)throw new Error('LOCAL_EXPORT_VERIFICATION_BOUNDARY');
     if(!r||typeof r!=='object')throw new Error('LOCAL_EXPORT_BAD_ROW');
-    return {user_entered:{...r},review_status:result.status,delta_pct:result.deltaPct??null,hold_or_review_reasons:[...result.reasons],source_verified:false};
+    return {user_entered:{...r},review_status:result.status,delta_pct:result.deltaPct??null,delta_pct_provenance:'USER_ENTERED_NOT_VERIFIED',verified_market_delta_pct:null,hold_or_review_reasons:[...result.reasons],source_verified:false};
   });
-  return {schema_version:LOCAL_EXPORT_SCHEMA,source_kind:'USER_ENTERED_NOT_VERIFIED',source_verified:false,independent_market_fact:false,automatic_repricing_permitted:false,exported_at:exportedAt,rows:checked,warning:'Your entries were not fetched or independently verified by PriceBriefs. REVIEW is not a pricing recommendation.'};
+  return {schema_version:LOCAL_EXPORT_SCHEMA,source_kind:'USER_ENTERED_NOT_VERIFIED',source_verified:false,independent_market_fact:false,automatic_repricing_permitted:false,exported_at:exportedAt,rows:checked,warning:'UNVERIFIED USER INPUTS ONLY: calculated price differences are not verified market observations. Nothing was fetched. REVIEW is not an automatic pricing recommendation.'};
 }
 export function assertImportUntrusted(data){
   if(data?.schema_version!==LOCAL_EXPORT_SCHEMA||data.source_kind!=='USER_ENTERED_NOT_VERIFIED'||data.source_verified!==false||data.independent_market_fact!==false)throw new Error('LOCAL_EXPORT_TRUST_BOUNDARY');

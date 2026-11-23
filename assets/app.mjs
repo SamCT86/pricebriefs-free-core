@@ -1,5 +1,5 @@
 import {evaluateBatch,LIMITS} from './review-engine.mjs';
-import {makeLocalExport} from './export-contract.mjs';
+import {makeLocalExport} from './export-contract.mjs?v=20261123-safe1';
 import {parsePriceBriefsCsv,csvTemplate} from './csv-review.mjs';
 import {explainCsvError} from './csv-diagnostics.mjs';
 
@@ -82,7 +82,7 @@ function showReview(rows){
     const difference=r.deltaPct!==null?
       r.deltaPct>0?'Peer lower than yours by '+r.deltaPct.toFixed(1)+'%':
       r.deltaPct<0?'Peer higher than yours by '+Math.abs(r.deltaPct).toFixed(1)+'%':'Same listed price':'';
-    return '<li><strong>Observation '+(i+1)+' · '+r.status+'</strong> '+esc(difference)+'<ul>'+r.reasons.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></li>';
+    return '<li><strong>Observation '+(i+1)+' · '+r.status+'</strong> <span class="unverified-label">NOT VERIFIED · entered values only</span> '+esc(difference)+'<ul>'+r.reasons.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></li>';
   });
   const disclosure=reviewMode==='demo'
     ?'This is a <strong>fictional example</strong>, not your own market data. No retailer facts were fetched or verified.'
@@ -239,7 +239,10 @@ demoButton?.addEventListener('click',()=>{
     merchantCondition:'new',peerCondition:'new',
     merchantPrice:'199',peerPrice:'179',
     sourceUrl:'https://pricebriefs.com/demo/fictional-observation',
-    observedAt:new Date(Date.now()-5*60*1000).toISOString().slice(0,16),
+    observedAt:(()=>{
+      const observed=new Date(Date.now()-5*60*1000);
+      return new Date(observed.getTime()-observed.getTimezoneOffset()*60000).toISOString().slice(0,16);
+    })(),
     stock:'in_stock',currency:'USD'
   };
   const row=list.querySelector('fieldset');

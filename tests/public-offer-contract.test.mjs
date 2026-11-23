@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const root=new URL('../',import.meta.url);
+const page=name=>fs.readFileSync(new URL(name,root),'utf8');
+test('Five-SKU human audit always nonbinding and distinct from free checker',()=>{
+  const home=page('index.html'),price=page('pricing/index.html'),request=page('request/index.html');
+  for(const text of [home,price,request]){
+    assert.doesNotMatch(text,/Paid audits are quoted in USD|Paid audit prices are quoted in USD|USD quote/);
+    assert.match(text,/five-SKU|five selected|five public|five product|five-page|five-SKU/i);
+    assert.match(text,/https:\/\/sarmadtawfeek\.se\/#contact/);
+  }
+  assert.match(price,/Indicative price: SEK 6,500 excl[.] VAT/);
+  assert.match(price,/cannot accept an order or payment/i);
+  assert.match(home,/no checkout or binding purchase here/i);
+  assert.match(price,/one agreed recheck/i);
+  assert.match(price,/reviewer/i);
+  assert.doesNotMatch(home+price+request,/<form[^>]*(?:payment|checkout)|buy now/i);
+});
+test('Public marketing never calls fictional input an independent market price',()=>{
+  const home=page('index.html'),app=page('assets/app.mjs'),exp=page('assets/export-contract.mjs');
+  assert.match(home,/Not live prices/);
+  assert.match(home,/haven.t checked any retailer website/i);
+  assert.match(app,/NOT VERIFIED · entered values only/);
+  assert.match(exp,/verified_market_delta_pct:null/);
+  assert.match(exp,/source_verified:false/);
+});
+test('Timezone demo uses actual local wall clock for datetime-local',()=>{
+  const app=page('assets/app.mjs');
+  assert.match(app,/getTimezoneOffset\(\)\*60000/);
+  assert.doesNotMatch(app,/observedAt:new Date\(Date\.now\(\)-5\*60\*1000\)\.toISOString/);
+});

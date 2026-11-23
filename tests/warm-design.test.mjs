@@ -8,12 +8,12 @@ const read=x=>readFileSync(path.join(root,x),'utf8');
 const routes=['index.html','app/index.html','pricing/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html','request/index.html'];
 
 test('all eight pages use the same local warm design with launch disclaimer',()=>{
- for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);assert.match(s,/noindex,nofollow/,p);assert.match(s,/Customer access is not open/,p);}
+ for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/FREE CHECKER OPEN/,p);else assert.match(s,/Customer access is not open/,p);}
 });
-test('human hero says outcome instead of generic AI magic',()=>{
+test('human hero specifies a five-page audit and evidence output, without false claims',()=>{
  const home=read('index.html');
- assert.match(home,/That cheaper price\?/);assert.match(home,/Check twice/);
- assert.match(home,/before you make a big decision/);
+ assert.match(home,/Find product-data mismatches/);assert.match(home,/before your next campaign/);
+ assert.match(home,/five public product pages/);assert.match(home,/source evidence/);
  assert.doesNotMatch(home,/guaranteed|100% accurate|AI-powered real.time/ig);
 });
 test('home has one primary product action and plainly fictional comparison',()=>{
@@ -41,7 +41,7 @@ test('real app has an ungated reversible fictional one-click path',()=>{
  assert.match(js,/source URL was not opened or verified/);
 });
 test('new design uses no third-party fonts or scripts',()=>{
- for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link[^>]+href="https?:/i,p);}
+ for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link(?=[^>]*rel="(?:stylesheet|preload|icon)")(?=[^>]*href="https?:)[^>]*>/i,p);}
  const css=read('assets/warm-2027.css');
  assert.doesNotMatch(css,/@import|url\s*\(\s*['"]?https?:/i);
 });
@@ -54,7 +54,10 @@ test('warm site remains accessible on reduced-motion and focus',()=>{
 test('no checkout, hidden analytics, or fake customer proof in this preview',()=>{
  for(const p of routes){const s=read(p);assert.doesNotMatch(s,/checkout\.stripe\.com|google-analytics|segment\.com|mixpanel\.com|10,000\+ customers|trusted by 5,000/i,p);}
 });
-test('commercial text does not claim paid AI services are active',()=>{
- assert.match(read('pricing/index.html'),/not yet open/i);
- assert.match(read('index.html'),/aren't for sale in this preview/);
+test('paid audit requires a separate human scope/quote and is not self-serve checkout',()=>{
+ const pricing=read('pricing/index.html'), home=read('index.html');
+ assert.match(pricing,/nothing here creates an automatic sale or binding quote/i);
+ assert.match(pricing,/cannot take payment or make a binding offer/i);
+ assert.match(home,/separately scoped and quoted/i);
+ assert.doesNotMatch(pricing,/checkout\.stripe|<form\b/i);
 });
