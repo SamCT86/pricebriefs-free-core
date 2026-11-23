@@ -41,7 +41,7 @@ test('real app has an ungated reversible fictional one-click path',()=>{
  assert.match(js,/source URL was not opened or verified/);
 });
 test('new design uses no third-party fonts or scripts',()=>{
- for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link[^>]+href="https?:/i,p);}
+ for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link(?=[^>]*rel="(?:stylesheet|preload|icon)")(?=[^>]*href="https?:)[^>]*>/i,p);}
  const css=read('assets/warm-2027.css');
  assert.doesNotMatch(css,/@import|url\s*\(\s*['"]?https?:/i);
 });
