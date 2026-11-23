@@ -21,8 +21,8 @@ test('non-numeric price fail closed',()=>{const x=valid();x.peerPrice='abc';asse
 test('invalid currency fail closed',()=>{const x=valid();x.currency='BTC';assert.equal(evaluate(x,now).status,'HOLD')});
 test('source URL is syntax-only, never automatically verified',()=>{assert.equal(sourceLooksPublicHttps(valid().sourceUrl),true);assert.equal(evaluate(valid(),now).sourceVerified,false)});
 for(const u of ['http://retailer.se/p','https://localhost/p','https://127.0.0.1/p','https://192.168.1.2/p','https://example.com/p','file:///secret','javascript:alert(1)','https://admin:pass@retailer.se/p','https://shop.local/p','https://retailer.se:8000/p'])test('reject unsafe source '+u,()=>assert.equal(sourceLooksPublicHttps(u),false));
-test('limit 6 total rows',()=>assert.equal(evaluateBatch(Array.from({length:7},valid),now).status,'HOLD'));
-test('limit 3 distinct products',()=>{const a=Array.from({length:4},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+i;return x});assert.equal(evaluateBatch(a,now).status,'HOLD')});
+test('limit 500 total rows',()=>assert.equal(evaluateBatch(Array.from({length:501},valid),now).status,'HOLD'));
+test('limit 500 distinct products',()=>{const a=Array.from({length:501},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+i;return x});assert.equal(evaluateBatch(a,now).status,'HOLD')});
 test('limit 2 competitor observations each',()=>assert.equal(evaluateBatch([valid(),valid(),valid()],now).status,'HOLD'));
 test('valid max 3 products ×2 peers accepted',()=>{const a=Array.from({length:6},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+Math.floor(i/2);return x});const r=evaluateBatch(a,now);assert.equal(r.status,'OK');assert.equal(r.results.length,6)});
 test('empty batch denied',()=>assert.equal(evaluateBatch([],now).status,'HOLD'));
@@ -38,5 +38,5 @@ test('fractional pack is HOLD',()=>{const x=valid();x.peerPack='1.5';assert.equa
 test('used item versus new is HOLD',()=>{const x=valid();x.peerCondition='used';assert.equal(evaluate(x,now).status,'HOLD')});
 test('unknown condition is HOLD',()=>{const x=valid();x.peerCondition='unknown';assert.equal(evaluate(x,now).status,'HOLD')});
 test('same brand case insensitive with pack same is REVIEW only, no source verification',()=>{const x=valid();x.peerBrand='MILWAUKEE';assert.equal(evaluate(x,now).status,'REVIEW');assert.equal(evaluate(x,now).sourceVerified,false)});
-test('two brands same SKU represent two distinct merchant products for count gate',()=>{const rows=Array.from({length:4},(_,i)=>{const x=valid();x.merchantBrand=x.peerBrand='B'+i;return x});assert.equal(evaluateBatch(rows,now).status,'HOLD')});
+test('four brands using same SKU remain independent products within 500-row scope',()=>{const rows=Array.from({length:4},(_,i)=>{const x=valid();x.merchantBrand=x.peerBrand='B'+i;return x});const out=evaluateBatch(rows,now);assert.equal(out.status,'OK');assert.equal(out.results.length,4);assert.ok(out.results.every(x=>x.status==='REVIEW'))});
 test('no unsafe localhost family URL can pass syntax gate',()=>{for(const s of ['https://private.local/p','https://shop.internal/p','https://test.example/p','https://api.localhost/p','https://sub.test/p','https://[::1]/p'])assert.equal(sourceLooksPublicHttps(s),false,s)});

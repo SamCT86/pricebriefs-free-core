@@ -19,10 +19,10 @@ export function explainCsvError(error,csvText=''){
  }
  if(code.startsWith('CSV_MISSING_FIELD_'))return 'CSV row is missing the field '+code.slice('CSV_MISSING_FIELD_'.length)+'.';
  const map={
-  CSV_EMPTY_OR_TOO_LARGE:'Paste at least one observation and an 18-column header. The maximum CSV size is 64 KB.',
+  CSV_EMPTY_OR_TOO_LARGE:'Paste at least one observation and an 18-column header. The maximum CSV size is 2 MB.',
   CSV_NEEDS_HEADER_AND_ROWS:'Include a header row plus at least one product comparison.',
-  CSV_SCOPE_NOT_1_TO_6:'Include between 1 and 6 comparison rows.',
-  CSV_TOO_MANY_ROWS:'The free checker accepts at most 6 comparison rows.',
+  CSV_SCOPE_NOT_1_TO_500:'Include between 1 and 500 comparison rows.',
+  CSV_TOO_MANY_ROWS:'The free checker accepts at most 500 comparison rows.',
   CSV_CELL_TOO_LARGE:'One CSV cell is longer than allowed. Check for accidental pasted text.',
   CSV_NUL_DENIED:'The CSV contains an unsupported control character. Export it as plain UTF-8 text.',
   CSV_UNCLOSED_QUOTE:'A quoted CSV value was not closed. Check paired quotation marks.',

@@ -1,0 +1,272 @@
+{
+  "at_utc": "2026-11-23T22:09:37.047111+00:00",
+  "scope": "MIKE E1 isolated canonical repo",
+  "changes": [
+    {
+      "file": "index.html",
+      "matches": 1
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1
+    },
+    {
+      "file": "pricing/index.html",
+      "matches": 1
+    },
+    {
+      "file": "product/index.html",
+      "matches": 1
+    },
+    {
+      "file": "how-it-works/index.html",
+      "matches": 1
+    },
+    {
+      "file": "trust/index.html",
+      "matches": 1
+    },
+    {
+      "file": "sample-brief/index.html",
+      "matches": 1
+    },
+    {
+      "file": "request/index.html",
+      "matches": 1
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "763de91bd4da78f24c41c6d10f271cf0299e2a0a521d5db19985390717768c10",
+      "new_sha": "71b905073b4c8d1b7c3868c070aa99cf3273441c397b58a7537db1a94e847284"
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "71b905073b4c8d1b7c3868c070aa99cf3273441c397b58a7537db1a94e847284",
+      "new_sha": "0da0b534201405552a76d4f698f718ade11224058ec8f21644ed01024dee0720"
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1,
+      "old_sha": "264ce51044137fc9f165cefd475cef219af28063af21a00d061e5e10d1ae473f",
+      "new_sha": "23524dc37f1b0291465bbb48d799782e29df8082cdea8a36533232c0c5dbe0d4"
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1,
+      "old_sha": "23524dc37f1b0291465bbb48d799782e29df8082cdea8a36533232c0c5dbe0d4",
+      "new_sha": "a74d266739f4bedef03e7d55a974cbfefa728ee225c87945334106681cbc8de2"
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "0da0b534201405552a76d4f698f718ade11224058ec8f21644ed01024dee0720",
+      "new_sha": "f04a5437fa9462437aff9a6f027fca0dcdae2465c8e76b214e8ba84f6de23c96"
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "f04a5437fa9462437aff9a6f027fca0dcdae2465c8e76b214e8ba84f6de23c96",
+      "new_sha": "7178877af0cfb672ec9684f18fbd6a2bc245324031e23a52c15df839e79abb10"
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "7178877af0cfb672ec9684f18fbd6a2bc245324031e23a52c15df839e79abb10",
+      "new_sha": "7e47ac193da2823234654ab5cc35c233893e3141b130388c12a19028715decdf"
+    },
+    {
+      "file": "pricing/index.html",
+      "matches": 1,
+      "old_sha": "761f314919182d42c5f637c9e70de575b78250ed2cf7d6d466f3f9226a2fc1e1",
+      "new_sha": "c117dfe499cab833a78cc8faebb82af33973d58acc69b2d2411e010089ba6cc5"
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1,
+      "old_sha": "a74d266739f4bedef03e7d55a974cbfefa728ee225c87945334106681cbc8de2",
+      "new_sha": "83eb6c3b86c3c83beeb3bde5582e7c382657452340435e35a0b417703dc244c6"
+    },
+    {
+      "file": "trust/index.html",
+      "matches": 1,
+      "old_sha": "c3f42ebad0b70740cae2bf7376ed215047bdc08eb3ace91edc7c1c80a850367c",
+      "new_sha": "12d30b2fdf30d21c30db8638194a6b05b7c5c8adcc6f49d70e19a0839df26dcd"
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1,
+      "old_sha": "83eb6c3b86c3c83beeb3bde5582e7c382657452340435e35a0b417703dc244c6",
+      "new_sha": "236829d4613f9f424fdb3b78445e9d90034dab6d954610a8d037e20e3d5950e2"
+    },
+    {
+      "file": "app/index.html",
+      "matches": 1,
+      "old_sha": "236829d4613f9f424fdb3b78445e9d90034dab6d954610a8d037e20e3d5950e2",
+      "new_sha": "410d28df07e57e66385866eddcb61b704192d20510f3b31d214b7a5b1222980e"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "cebb428fc512c5900f4aa6d9a822c3c5417b19b7be51c421f34c38d5bc1e3f79",
+      "new_sha": "34efc912f8ae2fb6c3a1b54807b5ac7c30312b23c9bcb049c3858f233bec650a"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "34efc912f8ae2fb6c3a1b54807b5ac7c30312b23c9bcb049c3858f233bec650a",
+      "new_sha": "506a81caebc4c4f3bfd89eb7d2e65f8f18c27477e51234c6e54a6a07f099dd91"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "506a81caebc4c4f3bfd89eb7d2e65f8f18c27477e51234c6e54a6a07f099dd91",
+      "new_sha": "2d0c404b5024effdc8ddd13e9d625ccb386a9e41a84469222bb7dce544c11bd5"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "2d0c404b5024effdc8ddd13e9d625ccb386a9e41a84469222bb7dce544c11bd5",
+      "new_sha": "ab5b4b5ad1e30f0fbc319497dd4a60c3637d070141b7ac538beb675b8f4dd6c0"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "ab5b4b5ad1e30f0fbc319497dd4a60c3637d070141b7ac538beb675b8f4dd6c0",
+      "new_sha": "9bde4727d6ba764d5a32efe23849a6c2b0448de816e5201f4e72464dc22d8ebd"
+    },
+    {
+      "file": "assets/app.mjs",
+      "matches": 1,
+      "old_sha": "9bde4727d6ba764d5a32efe23849a6c2b0448de816e5201f4e72464dc22d8ebd",
+      "new_sha": "fdd2a0ef9359f9859c67bbe8c45a375321c0aea8016addc233bb6e505d85849d"
+    },
+    {
+      "file": "assets/csv-review.mjs",
+      "matches": 1,
+      "old_sha": "6c6c7bfde2a43441d8a3ba30233e10d36e8dd16a0e343d225164c98158177113",
+      "new_sha": "1ab27a7922df4226ad958be719852c52f8a2bd602b78449305728c3383d044bf"
+    },
+    {
+      "file": "assets/csv-review.mjs",
+      "matches": 1,
+      "old_sha": "1ab27a7922df4226ad958be719852c52f8a2bd602b78449305728c3383d044bf",
+      "new_sha": "0534e1270ee4a2711e14b79cd8518b0e0b1c9941c4be75c6c42ac4dff48eac48"
+    },
+    {
+      "file": "assets/review-engine.mjs",
+      "matches": 1,
+      "old_sha": "6a7fe1b89d56ca9f5081a5e19b2dedea5bfcd69fc7efffb053353f2b37289809",
+      "new_sha": "9fe8c83e05bd7ac9ced3164d5cf8381b1980979bb1fd31ba7be22fb5ad60f563"
+    },
+    {
+      "file": "assets/review-engine.mjs",
+      "matches": 1,
+      "old_sha": "9fe8c83e05bd7ac9ced3164d5cf8381b1980979bb1fd31ba7be22fb5ad60f563",
+      "new_sha": "53684c5c308a4e4584a735db0c3c991b2f27eabbbc0b6e401b6a3bb61883f2f4"
+    },
+    {
+      "file": "assets/review-engine.mjs",
+      "matches": 1,
+      "old_sha": "53684c5c308a4e4584a735db0c3c991b2f27eabbbc0b6e401b6a3bb61883f2f4",
+      "new_sha": "acaa882dfdcf35d02566587195d4ad212cc3d4501e62680d1f9a11f0902ba68f"
+    },
+    {
+      "file": "assets/export-contract.mjs",
+      "matches": 1,
+      "old_sha": "5671976c164f2f68b95b8bae497bda02fa346d3ba2705b2b9be9726de118d87a",
+      "new_sha": "0add50e427b75f2937d4ed27d171dbc189c225a8e745f5145e88fc2b50cb34c8"
+    },
+    {
+      "file": "assets/csv-diagnostics.mjs",
+      "matches": 1,
+      "old_sha": "db4b4db70a1c8da157a64fe3390e0543303109500338903546a5b9fa9b2e597b",
+      "new_sha": "8742f5a16bccf70606aa44341d7fa40f431dca5768482fe69cf1e1a6ea8e509c"
+    },
+    {
+      "file": "assets/csv-diagnostics.mjs",
+      "matches": 1,
+      "old_sha": "8742f5a16bccf70606aa44341d7fa40f431dca5768482fe69cf1e1a6ea8e509c",
+      "new_sha": "06dca16c0c368b05b81eefad7342d50d0d73ebe59c7e7c711c309d4ba5069cf2"
+    },
+    {
+      "file": "assets/csv-diagnostics.mjs",
+      "matches": 1,
+      "old_sha": "06dca16c0c368b05b81eefad7342d50d0d73ebe59c7e7c711c309d4ba5069cf2",
+      "new_sha": "8dca76345a92dc56e95091a4173f950f250526d03771eca8f2d2c1b3343e5b51"
+    },
+    {
+      "file": "assets/csv-diagnostics.mjs",
+      "matches": 1,
+      "old_sha": "8dca76345a92dc56e95091a4173f950f250526d03771eca8f2d2c1b3343e5b51",
+      "new_sha": "1d71aeb590d29791f30e7899cde83ba42bd83eef7b24f27f35ad11a381da67bf"
+    },
+    {
+      "file": "assets/csv-review.mjs",
+      "append": "fictionalCsvSample25"
+    },
+    {
+      "file": "tests/csv-review.test.mjs",
+      "matches": 1,
+      "old_sha": "9a6594faaa5a7ada3d229f59d9c7836bca02dc4aec593bd26ec27d9532bc3df4",
+      "new_sha": "b2cc2fa477e4d19fbb8726c0cb2330b7d5674fc32653b2559c3b889691601726"
+    },
+    {
+      "file": "tests/csv-review.test.mjs",
+      "matches": 1,
+      "old_sha": "b2cc2fa477e4d19fbb8726c0cb2330b7d5674fc32653b2559c3b889691601726",
+      "new_sha": "fa8320fbce7fe581cc8c3e11404dde95fd66ae4f72ac3d14bec665644427073c"
+    },
+    {
+      "file": "tests/review-engine.test.mjs",
+      "matches": 1,
+      "old_sha": "b495ab263aad0549fca396fa8fb142e30133212be3de27ece9902a069d963117",
+      "new_sha": "c48e82e1fd31e635540d5f756b86547c307a3c18564b5615475f5615dee22ca9"
+    },
+    {
+      "file": "tests/review-engine.test.mjs",
+      "matches": 1,
+      "old_sha": "c48e82e1fd31e635540d5f756b86547c307a3c18564b5615475f5615dee22ca9",
+      "new_sha": "e41c71b65b22c290cce41f597e59c12ee41e01b3e0d31b5c9494080b736025b8"
+    },
+    {
+      "file": "tests/export-contract.test.mjs",
+      "matches": 1,
+      "old_sha": "35c48e34afda2364c13659a9a37914b44c89b5e85d63058a5b7848973f8a4a8b",
+      "new_sha": "fa98e798089fa7bf58b09d120331bf092306370ce3f12f4feb610f642d21be5c"
+    },
+    {
+      "file": "tests/export-contract.test.mjs",
+      "matches": 1,
+      "old_sha": "fa98e798089fa7bf58b09d120331bf092306370ce3f12f4feb610f642d21be5c",
+      "new_sha": "d2727e48adfdd2f47788c44e507d6fa4daaebf243c76227e350548941e39cf13"
+    },
+    {
+      "file": "robots.txt",
+      "matches": 1,
+      "old_sha": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1",
+      "new_sha": "6d3032bfc45fcad40b22c4ed586c3f949219bd133c730eaa3428050524e06691"
+    },
+    {
+      "new_file": "sitemap.xml"
+    },
+    {
+      "file": "index.html",
+      "matches": 1,
+      "old_sha": "7e47ac193da2823234654ab5cc35c233893e3141b130388c12a19028715decdf",
+      "new_sha": "f1fdb17f294018cbd4a40de0442bfbebf70aa0c0c08d84e5842fc1a9a1b8c498"
+    },
+    {
+      "new_file": "docs/LEGAL_DRAFT_PRIVACY_REVIEW_ONLY.md"
+    },
+    {
+      "new_file": "docs/LEGAL_DRAFT_TERMS_REVIEW_ONLY.md"
+    },
+    {
+      "new_file": "tests/bulk-local-csv.test.mjs"
+    }
+  ],
+  "E4_approved": false,
+  "legal_drafts_published": false
+}

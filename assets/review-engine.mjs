@@ -3,7 +3,7 @@
  * User-entered observation != independently source-verified evidence.
  * No network, storage, model call, tracking, repricing, or merchant data transfer.
  */
-export const LIMITS=Object.freeze({maxRows:6,maxProducts:3,maxPeersPerProduct:2,maxAgeHours:24,maxPack:1000});
+export const LIMITS=Object.freeze({maxRows:500,maxProducts:500,maxPeersPerProduct:2,maxAgeHours:24,maxPack:1000});
 const normalize=x=>String(x??'').trim().toUpperCase().replace(/\s+/g,' ');
 // Reject JS Number() alternate notations (hex, binary, exponent, >2 decimals).
 const num=x=>{
@@ -55,7 +55,7 @@ export function evaluate(row,now=Date.now()){
   return {status:'REVIEW',reasons:['User-entered fields look comparable; retailer page, stock, tax, shipping and product identity are NOT independently verified'],deltaPct:Math.round((m-p)/m*1000)/10,sourceVerified:false};
 }
 export function evaluateBatch(rows,now=Date.now()){
-  if(!Array.isArray(rows)||rows.length<1||rows.length>LIMITS.maxRows)return {status:'HOLD',reason:'Use 1–6 observations',results:[]};
+  if(!Array.isArray(rows)||rows.length<1||rows.length>LIMITS.maxRows)return {status:'HOLD',reason:'Use 1–500 observations',results:[]};
   const products=new Map();
   for(const r of rows){
     // JSON tuple encoding prevents attacker-controlled delimiter collisions between fields.
@@ -64,6 +64,6 @@ export function evaluateBatch(rows,now=Date.now()){
       String(pack(r?.merchantPack)),normalize(r?.merchantCondition)]);
     products.set(key,(products.get(key)||0)+1);
   }
-  if(products.size>LIMITS.maxProducts||[...products.values()].some(n=>n>LIMITS.maxPeersPerProduct))return {status:'HOLD',reason:'Free preview scope: max 3 distinct products × 2 comparisons each',results:[]};
+  if(products.size>LIMITS.maxProducts||[...products.values()].some(n=>n>LIMITS.maxPeersPerProduct))return {status:'HOLD',reason:'Local CSV scope: max 500 products × 2 comparisons each',results:[]};
   return {status:'OK',results:rows.map(x=>evaluate(x,now))};
 }

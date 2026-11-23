@@ -1,0 +1,2 @@
+# Terms – draft for legal review only
+The free browser checker compares self-entered fields and does not independently verify retailer sources; REVIEW is not an automatic repricing recommendation. Paid five-SKU audits are a separate, non-binding written quote requiring actual contracting party, currency, taxes, reviewer, acceptance and payment conditions. The legal entity, governing law and enforceable terms need human review before publishing. Do not represent this draft as a signed contract.
