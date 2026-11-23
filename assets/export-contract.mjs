@@ -1,7 +1,7 @@
 /** Browser-local export only. This module DOES NOT create verified price observations. */
 export const LOCAL_EXPORT_SCHEMA='pb-local-review-v2';
 export function makeLocalExport(rows,results,exportedAt=new Date().toISOString()){
-  if(!Array.isArray(rows)||!Array.isArray(results)||rows.length!==results.length||rows.length<1||rows.length>6)throw new Error('LOCAL_EXPORT_SCOPE');
+  if(!Array.isArray(rows)||!Array.isArray(results)||rows.length!==results.length||rows.length<1||rows.length>500)throw new Error('LOCAL_EXPORT_SCOPE');
   if(!Number.isFinite(Date.parse(exportedAt)))throw new Error('LOCAL_EXPORT_TIME');
   const checked=rows.map((r,i)=>{
     const result=results[i];

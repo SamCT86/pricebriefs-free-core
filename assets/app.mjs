@@ -1,6 +1,6 @@
 import {evaluateBatch,LIMITS} from './review-engine.mjs';
 import {makeLocalExport} from './export-contract.mjs?v=20261123-safe1';
-import {parsePriceBriefsCsv,csvTemplate} from './csv-review.mjs';
+import {parsePriceBriefsCsv,csvTemplate,fictionalCsvSample25} from './csv-review.mjs';
 import {explainCsvError} from './csv-diagnostics.mjs';
 
 const form=document.querySelector('#review-form');
@@ -12,6 +12,8 @@ const exportButton=document.querySelector('#export-results');
 const csvButton=document.querySelector('#review-csv');
 const csvText=document.querySelector('#csv-text');
 const templateButton=document.querySelector('#download-csv-template');
+const fictionalCsvButton=document.querySelector('#download-fictional-csv');
+const MANUAL_OBSERVATIONS_MAX=6;
 let lastExport=null;
 let reviewMode='manual'; // manual | csv | demo
 let reviewSnapshot=null;
@@ -165,9 +167,9 @@ if(form&&list&&result){
     if(reviewMode==='demo')return;
     invalidateCurrentReview();
     const n=list.querySelectorAll('fieldset').length;
-    if(n>=LIMITS.maxRows){add.disabled=true;return;}
+    if(n>=MANUAL_OBSERVATIONS_MAX){add.disabled=true;return;}
     list.insertAdjacentHTML('beforeend',rowMarkup(n+1));
-    if(n+1>=LIMITS.maxRows)add.disabled=true;
+    if(n+1>=MANUAL_OBSERVATIONS_MAX)add.disabled=true;
   });
   form.addEventListener('submit',e=>{
     e.preventDefault();
@@ -186,7 +188,7 @@ if(form&&list&&result){
     try{showReview(parsePriceBriefsCsv(csvText?.value??''));}
     catch(e){
       result.hidden=false;result.classList.add('hold');
-      result.innerHTML='<h3>CSV needs attention</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Download the 18-column template and paste 1–6 complete rows. Your data stays in this browser.</p>';
+      result.innerHTML='<h3>CSV needs attention</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Download the 18-column template and paste 1–500 complete rows. Your data stays in this browser.</p>';
       // Preserve the input snapshot for a failed parse, too. A delayed blur
       // with unchanged input cannot erase the diagnostic; edits still can.
       reviewSnapshot=currentSnapshot();
@@ -195,6 +197,7 @@ if(form&&list&&result){
     result.scrollIntoView({block:'nearest',behavior:'smooth'});
   });
   templateButton?.addEventListener('click',()=>saveLocal(csvTemplate(),'pricebriefs-blank-template.csv','text/csv;charset=utf-8'));
+  fictionalCsvButton?.addEventListener('click',()=>saveLocal(fictionalCsvSample25(),'pricebriefs-FICTIONAL-25-row-example.csv','text/csv;charset=utf-8'));
   exportButton?.addEventListener('click',()=>{
     if(!lastExport||!reviewedRows)return;
     if(reviewSnapshot!==currentSnapshot()){invalidateCurrentReview();return;}

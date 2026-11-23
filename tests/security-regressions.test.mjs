@@ -16,12 +16,12 @@ const good={
 test('BASELINE comparison is REVIEW and never verified',()=>{
   const a=evaluate(good,clock);assert.equal(a.status,'REVIEW');assert.equal(a.sourceVerified,false);
 });
-test('BAD: four actual products may not collapse to three on delimiter collisions',()=>{
+test('BAD: four distinct products with delimiter collisions stay distinct, all four assessed',()=>{
   const a={...good,merchantBrand:'A|B',peerBrand:'A|B',merchantSku:'C',peerSku:'C'};
   const b={...good,merchantBrand:'A',peerBrand:'A',merchantSku:'B|C',peerSku:'B|C'};
   const c={...good,merchantBrand:'Z',peerBrand:'Z',merchantSku:'K',peerSku:'K'};
   const e={...good,merchantBrand:'Z',peerBrand:'Z',merchantSku:'L',peerSku:'L'};
-  assert.equal(evaluateBatch([a,b,c,e],clock).status,'HOLD');
+  const out=evaluateBatch([a,b,c,e],clock);assert.equal(out.status,'OK');assert.equal(out.results.length,4);
 });
 test('BAD: three distinct products still accepted',()=>{
  const a={...good,merchantSku:'100',peerSku:'100'};
@@ -78,14 +78,14 @@ test('PRODUCT SCOPE: different category with same brand and MPN is not the same 
  const p2={...good,merchantSku:'A',peerSku:'A',merchantType:'Saw',peerType:'Saw'};
  const p3={...good,merchantSku:'B',peerSku:'B'};
  const p4={...good,merchantSku:'C',peerSku:'C'};
- assert.equal(evaluateBatch([p1,p2,p3,p4],clock).status,'HOLD');
+ const out=evaluateBatch([p1,p2,p3,p4],clock);assert.equal(out.status,'OK');assert.equal(out.results.length,4);
 });
 test('PRODUCT SCOPE: distinct condition of own product must not collapse into one identifier',()=>{
  const p1={...good,merchantSku:'A',peerSku:'A',merchantCondition:'new',peerCondition:'new'};
  const p2={...good,merchantSku:'A',peerSku:'A',merchantCondition:'used',peerCondition:'used'};
  const p3={...good,merchantSku:'B',peerSku:'B'};
  const p4={...good,merchantSku:'C',peerSku:'C'};
- assert.equal(evaluateBatch([p1,p2,p3,p4],clock).status,'HOLD');
+ const out=evaluateBatch([p1,p2,p3,p4],clock);assert.equal(out.status,'OK');assert.equal(out.results.length,4);
 });
 test('PRODUCT SCOPE: two comparison peers per exact identical product still allowed',()=>{
  const r=evaluateBatch([{...good},{...good}],clock);

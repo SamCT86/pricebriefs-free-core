@@ -7,7 +7,7 @@ export const COLUMNS=Object.freeze([
   'merchantVariant','peerVariant','merchantPack','peerPack','merchantCondition',
   'peerCondition','merchantPrice','peerPrice','sourceUrl','observedAt','stock','currency'
 ]);
-const MAX_BYTES=65_536,MAX_ROWS=6,MAX_CELL=2048;
+const MAX_BYTES=2_097_152,MAX_ROWS=500,MAX_CELL=2048;
 export function parsePriceBriefsCsv(text){
   if(typeof text!=='string'||new TextEncoder().encode(text).length>MAX_BYTES||text.trim().length===0)throw new Error('CSV_EMPTY_OR_TOO_LARGE');
   const rows=[];let row=[],field='',quoted=false,justClosedQuote=false;
@@ -34,7 +34,7 @@ export function parsePriceBriefsCsv(text){
   if(rows.length<2)throw new Error('CSV_NEEDS_HEADER_AND_ROWS');
   const hdr=rows.shift();
   if(hdr.length!==COLUMNS.length||new Set(hdr).size!==hdr.length||hdr.some(x=>!COLUMNS.includes(x)))throw new Error('CSV_UNKNOWN_OR_DUPLICATE_HEADER');
-  if(rows.length<1||rows.length>MAX_ROWS)throw new Error('CSV_SCOPE_NOT_1_TO_6');
+  if(rows.length<1||rows.length>MAX_ROWS)throw new Error('CSV_SCOPE_NOT_1_TO_500');
   return rows.map((values,i)=>{
     if(values.length!==hdr.length)throw new Error('CSV_ROW_COLUMN_COUNT_'+(i+2));
     const row=Object.fromEntries(hdr.map((k,j)=>[k,values[j]]));
@@ -44,4 +44,24 @@ export function parsePriceBriefsCsv(text){
 }
 export function csvTemplate(){
   return COLUMNS.join(',')+'\n';
+}
+/** Every row here is invented synthetic demo data, not observed retailer evidence. */
+export function fictionalCsvSample25(now=Date.now()){
+ const stamp=new Date(now-5*60_000).toISOString();
+ const output=[COLUMNS.join(',')];
+ const csv=v=>{const x=String(v??'');return /[",\r\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x};
+ for(let i=1;i<=25;i++){
+   const id='FICTIONAL-PB-'+String(i).padStart(3,'0');
+   const row={
+     merchantSku:id,peerSku:id,merchantBrand:'Imaginary Tools',peerBrand:'Imaginary Tools',
+     merchantType:'Demo Drill',peerType:'Demo Drill',merchantVariant:'Invented Variant',peerVariant:'Invented Variant',
+     merchantPack:'1',peerPack:i%6===0?'2':'1',
+     merchantCondition:'new',peerCondition:i%7===0?'used':'new',
+     merchantPrice:'199',peerPrice:'179',
+     sourceUrl:'https://pricebriefs.com/demo/fictional-observation/'+id,
+     observedAt:stamp,stock:i%9===0?'unknown':'in_stock',currency:'USD'
+   };
+   output.push(COLUMNS.map(k=>csv(row[k])).join(','));
+ }
+ return output.join('\n')+'\n';
 }

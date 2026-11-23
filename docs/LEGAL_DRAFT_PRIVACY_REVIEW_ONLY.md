@@ -1,0 +1,2 @@
+# Privacy notice – draft for legal review only
+PriceBriefs operates a browser-local manual/CSV product comparison tool. User input is processed locally, without uploading product data through the checker. Hosting/CDN providers may record normal request metadata; no verified retention schedule, controller identity or binding company legal name is supplied here. Those fields require human/legal review. A contact link leads to a separate website whose own privacy notices govern enquiries. Do not publish this draft as final policy.
