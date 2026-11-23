@@ -50,12 +50,15 @@ test('F6 other store SKU cannot substitute for manufacturer MPN',()=>{
 test('F6 unknown shared identity is HOLD',()=>{
  const r=evaluate({...good,peerSku:''},now);assert.equal(r.status,'HOLD');
 });
-test('F5 first CTA leads directly to own checker',()=>{
- assert.match(read('index.html'),/href="\/app\/#review-form">Check one product free/);
+test('F5 first paid CTA uses AUREL-approved existing human contact route; free checker remains open',()=>{
+ const h=read('index.html');
+ assert.match(h,/href="https:\/\/sarmadtawfeek\.se\/#contact">Discuss a five-SKU audit/);
+ assert.match(h,/href="\/app\/">Open the free comparison checker/);
+ assert.doesNotMatch(h,/<form\b|checkout\.stripe/i);
 });
-test('F5 product status clearly distinguishes preview and hosted monitoring',()=>{
- assert.match(read('pricing/index.html'),/paid services are not available here/i);
- assert.match(read('index.html'),/Customer access is not open/);
+test('F5 separate paid scope is not hosted monitoring, and app is still an unverified preview',()=>{
+ assert.match(read('pricing/index.html'),/No automatic retailer crawling or subscription checkout/i);
+ assert.match(read('index.html'),/FREE CHECKER OPEN/);
  assert.match(read('app/index.html'),/No account, card or upload/);
 });
 test('F7 interim privacy note does not claim full terms',()=>{
