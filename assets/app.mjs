@@ -54,7 +54,7 @@ const textInput=name=>{
 const condition=name=>'<label class="field">'+(name==='merchantCondition'?'Your':'Other listing')+' condition<select name="'+name+'"><option value="unknown">Unknown — HOLD</option><option value="new">New</option><option value="refurbished">Refurbished</option><option value="used">Used</option></select></label>';
 const otherField=name=>name==='merchantCondition'||name==='peerCondition'?condition(name):
  name==='stock'?'<label class="field">Other listing stock<select name="stock"><option value="unknown">Unknown — HOLD</option><option value="in_stock">In stock (you checked)</option><option value="out_of_stock">Out of stock</option></select></label>':
- name==='currency'?'<label class="field">Currency (same for both prices)<select name="currency"><option>SEK</option><option>USD</option><option>EUR</option><option>GBP</option></select></label>':
+ name==='currency'?'<label class="field">Currency (same for both prices)<select name="currency"><option value="" selected disabled>Choose currency</option><option>USD</option><option>EUR</option><option>GBP</option><option>SEK</option></select></label>':
  textInput(name);
 const group=(heading,hint,keys)=>
  '<section class="review-group" aria-label="'+esc(heading)+'"><h4>'+esc(heading)+'</h4><p class="review-hint">'+esc(hint)+'</p><div class="form-grid">'+keys.map(otherField).join('')+'</div></section>';

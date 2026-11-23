@@ -10,7 +10,7 @@ test('Five-SKU human audit always nonbinding and distinct from free checker',()=
     assert.match(text,/five-SKU|five selected|five public|five product|five-page|five-SKU/i);
     assert.match(text,/https:\/\/sarmadtawfeek\.se\/#contact/);
   }
-  assert.match(price,/Indicative price: SEK 6,500 excl[.] VAT/);
+  assert.match(price,/written quote in an agreed currency/);
   assert.match(price,/cannot accept an order or payment/i);
   assert.match(home,/no checkout or binding purchase here/i);
   assert.match(price,/one agreed recheck/i);
