@@ -1,0 +1,32 @@
+.pricing-intro.page-head{padding:clamp(40px,5vw,76px) 0 42px;text-align:center}
+.pricing-intro h1{font-size:clamp(40px,5.8vw,72px);margin:0 auto 20px}
+.pricing-intro .lead{margin:0 auto;max-width:60ch;font-size:18px}
+.pricing-options{padding:0 0 70px;background:linear-gradient(#fff7ec 0,#fcf8f0 230px)}
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:960px;margin:auto}
+.pricing-card{display:flex;flex-direction:column;position:relative;min-width:0;padding:clamp(24px,3.8vw,42px);border:1px solid #dddcd0;border-radius:26px;background:#fffefa;box-shadow:0 12px 40px #29463809}
+.pricing-card.pricing-paid{border-color:#9eb5a0;background:#f5faef;box-shadow:0 12px 40px #29463812}
+.pricing-card .tag{margin:0 0 14px}
+.pricing-card h2{margin:0 0 14px;font-size:clamp(25px,3vw,34px);letter-spacing:-.045em;line-height:1.15}
+.plan-price{font-family:Georgia,serif;font-size:clamp(34px,4vw,47px);line-height:1.12;letter-spacing:-.05em;color:#24473b;margin:0 0 16px}
+.plan-price span{font:500 13px/1.4 "Segoe UI",system-ui,sans-serif;letter-spacing:0;display:block;margin-top:6px;color:#52665a}
+.plan-description{margin:0 0 22px;color:#354f44;font-size:16px;min-height:3.2em}
+.plan-features{list-style:none;padding:22px 0 0;margin:0 0 28px;border-top:1px solid #dedfd3;display:grid;gap:13px}
+.plan-features li{position:relative;padding-left:25px;font-size:15px;line-height:1.5}
+.plan-features li:before{content:"";position:absolute;left:2px;top:6px;width:7px;height:11px;border:solid #397150;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.plan-action{margin-top:auto}.plan-action .btn{width:100%;gap:12px}.plan-action p{font-size:13px;color:#52665a;margin:12px 0 0;text-align:center}
+.plan-status{font-size:12px;color:#52665a;text-align:center;margin-top:8px}
+.pricing-trust{max-width:960px;margin:24px auto;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;font-size:13px;color:#52665a}
+.pricing-terms{max-width:960px;margin:24px auto 0;border-top:1px solid #dcded3;padding:18px 0;color:#52665a;font-size:14px}
+.pricing-terms summary{cursor:pointer;font-weight:650;color:#24473b}.pricing-terms p{max-width:78ch}
+.pricing-faq.section{padding:60px 0}.pricing-faq .wrap{max-width:960px}
+@media(max-width:760px){.pricing-grid{grid-template-columns:1fr;max-width:520px}.pricing-intro.page-head{padding:36px 0 28px}.pricing-intro .lead{font-size:16px}.plan-description{min-height:0}.pricing-options{padding-bottom:32px}.pricing-trust{flex-direction:column;align-items:center;gap:7px}.pricing-faq.section{padding:44px 0}}
+/* Compact above-the-fold rhythm; preserve touch targets and readable copy. */
+.pricing-page .pricing-intro.page-head{padding:clamp(30px,4vw,52px) 0 30px}
+.pricing-page .pricing-intro.page-head h1{font-size:clamp(34px,4.7vw,62px);margin-bottom:14px}
+.pricing-card{padding:clamp(22px,3vw,34px)}
+.pricing-card .tag{margin-bottom:8px}
+.pricing-card h2{margin-bottom:9px}
+.plan-price{margin-bottom:12px}
+.plan-description{margin-bottom:16px}
+.plan-features{padding-top:16px;gap:9px;margin-bottom:20px}
+@media(max-width:760px){.pricing-page .pricing-intro.page-head{padding:30px 0 24px}.pricing-page .pricing-intro.page-head h1{font-size:clamp(32px,8vw,44px)}}
