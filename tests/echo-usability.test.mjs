@@ -52,7 +52,7 @@ test('F6 unknown shared identity is HOLD',()=>{
 });
 test('F5 first paid CTA uses AUREL-approved existing human contact route; free checker remains open',()=>{
  const h=read('index.html');
- assert.match(h,/href="https:\/\/sarmadtawfeek\.se\/#contact">Request a scoped five-SKU audit/);
+ assert.match(h,/href="\/request\/">Request a scoped five-SKU audit/);
  assert.match(h,/href="\/app\/">Open the free comparison checker/);
  assert.doesNotMatch(h,/<form\b|checkout\.stripe/i);
 });

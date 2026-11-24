@@ -151,3 +151,11 @@ html{scroll-padding-top:92px}body{background:var(--paper);color:var(--ink);font-
 .row-actions{display:flex;justify-content:flex-end;margin:17px 0 0}
 .row-actions .btn{min-height:38px;padding:8px 15px;font-size:12px}
 @media(max-width:380px){.row-actions .btn{width:100%}}
+
+/* Native audit request form */
+.nexus-audit-form{margin-top:2rem;max-width:640px;background:#fff;border:1px solid rgba(28,25,23,.14);border-radius:14px;padding:1.5rem;display:grid;gap:1rem}
+.nexus-audit-form label{display:grid;gap:.35rem;font-weight:600;font-size:.95rem}
+.nexus-audit-form input,.nexus-audit-form textarea{width:100%;padding:.7rem .85rem;border:1px solid rgba(28,25,23,.22);border-radius:10px;font:inherit;background:#fcfaf6;color:#1c1917}
+.nexus-audit-form textarea{min-height:92px;resize:vertical}
+.nexus-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.nexus-form-note{font-size:.86rem;opacity:.8;margin:0}
