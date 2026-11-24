@@ -173,3 +173,5 @@ html{scroll-padding-top:92px}body{background:var(--paper);color:var(--ink);font-
 .conversion-rows p{margin:5px 0 0;color:#52665a}
 #audit-example{scroll-margin-top:100px}
 @media(max-width:760px){.conversion-proof{grid-template-columns:1fr}}
+/* CRO: readable policy navigation. */
+.legal-links{padding-block:12px 22px;font-size:14px;color:#fffefa}.legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
