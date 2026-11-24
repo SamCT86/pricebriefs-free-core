@@ -1,0 +1,22 @@
+.receipt-page{background:radial-gradient(ellipse at 80% 10%,#ffe3d5,transparent 55%),#fcf8f0;color:#21362f;min-height:100vh;display:flex;flex-direction:column}
+.receipt-page .receipt-header{width:min(1100px,calc(100% - 40px));margin:0 auto;padding:24px 0;display:flex;align-items:center;border-bottom:1px solid #dddcd0}
+.receipt-page .receipt-main{width:min(680px,calc(100% - 32px));margin:auto;padding:40px 0}
+.receipt-card{padding:clamp(24px,5vw,54px);border:1px solid #dddcd0;border-radius:28px;background:#fffefa;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.08)}
+.receipt-mark{width:72px;height:72px;border-radius:50%;background:#e5efdf;color:#315944;display:grid;place-items:center;margin:0 auto 22px}
+.receipt-kicker{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.12em;color:#315944;margin:0 0 14px}
+.receipt-card h1{font-size:clamp(30px,5vw,48px);line-height:1.12;letter-spacing:-.045em;margin:0 0 16px}
+.receipt-intro{font-size:17px;color:#52665a;line-height:1.6;max-width:42ch;margin:0 auto}
+.receipt-next{text-align:left;border:1px solid #dddcd0;border-radius:16px;padding:20px;margin:28px 0}
+.receipt-next h2{font-size:16px;margin:0 0 15px;letter-spacing:-.02em}
+.receipt-next ol{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.receipt-next li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+.receipt-next li span{color:#315944;font-size:12px;font-weight:700;padding-top:3px}
+.receipt-next li p{font-size:15px;margin:0;line-height:1.5}
+.receipt-note{font-size:13px;color:#52665a;margin:16px 0 0;padding-top:14px;border-top:1px solid #dddcd0}
+.receipt-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.receipt-actions a{min-height:48px}
+.receipt-help{font-size:13px;color:#52665a;margin:24px 0 0;overflow-wrap:anywhere}
+.receipt-help a{color:inherit;text-underline-offset:3px}
+.receipt-page .receipt-footer{width:100%;margin:0;padding:20px;text-align:center;display:block;background:transparent;border:0;color:#52665a;font-size:12px}
+.receipt-page a:focus-visible{outline:2px solid #315944;outline-offset:4px}
+@media(max-width:480px){.receipt-page .receipt-main{padding:24px 0}.receipt-card{padding:23px 18px;border-radius:20px}.receipt-actions a{width:100%}.receipt-next{padding:16px}.receipt-mark{width:60px;height:60px}}
