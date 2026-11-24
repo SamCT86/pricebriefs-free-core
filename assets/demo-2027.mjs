@@ -34,6 +34,8 @@ function show(which){
   copy.textContent=entry.body;
   result.dataset.status=outcome.status;
   result.dataset.sourceVerified='false';
+  const peer=document.querySelector('#peer-image'),label=document.querySelector('#peer-pack-label');
+  if(peer&&label){const image=which==='pack'?'drill-six':which==='brand'?'drill-other':'drill-one';peer.src='/assets/'+image+'.svg';peer.alt=which==='pack'?'Illustrative six drill kits':which==='brand'?'Illustrative different brand drill kit':'Illustrative green drill kit';label.textContent=which==='pack'?'6 kits':which==='brand'?'1 kit · other brand':'1 kit';}
 }
 if(group&&mini&&details&&result&&title&&copy&&icon){
   group.addEventListener('click',event=>{
@@ -42,3 +44,6 @@ if(group&&mini&&details&&result&&title&&copy&&icon){
   });
   show('match');
 }
+
+const vol=document.querySelector('#risk-volume'),risk=document.querySelector('#risk-result'),units=document.querySelector('#risk-units'),big=document.querySelector('.pb-risk strong');
+if(vol&&risk&&units&&big){const refresh=()=>{const n=Number(vol.value);if(!Number.isInteger(n)||n<100||n>1000)return;const amount=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(20*n);units.textContent=n+' units';big.textContent=amount;risk.textContent='At '+n+' units: '+amount+' less gross profit.';};vol.addEventListener('input',refresh);refresh();}
