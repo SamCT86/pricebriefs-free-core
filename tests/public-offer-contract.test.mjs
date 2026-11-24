@@ -19,8 +19,7 @@ test('Five-SKU human audit always nonbinding and distinct from free checker',()=
 });
 test('Public marketing never calls fictional input an independent market price',()=>{
   const home=page('index.html'),app=page('assets/app.mjs'),exp=page('assets/export-contract.mjs');
-  assert.match(home,/Not live prices/);
-  assert.match(home,/haven.t checked any retailer website/i);
+  assert.match(home,/Sample data \(not live prices\)/i);
   assert.match(app,/NOT VERIFIED · entered values only/);
   assert.match(exp,/verified_market_delta_pct:null/);
   assert.match(exp,/source_verified:false/);

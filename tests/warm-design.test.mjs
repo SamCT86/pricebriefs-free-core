@@ -8,7 +8,7 @@ const read=x=>readFileSync(path.join(root,x),'utf8');
 const routes=['index.html','app/index.html','pricing/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html','request/index.html'];
 
 test('all eight pages use the same local warm design with launch disclaimer',()=>{
- for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/FREE CHECKER OPEN/,p);else assert.match(s,/Customer access is not open/,p);}
+ for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(p==='index.html')assert.match(s,/Open the free comparison checker/,p);else if(['pricing/index.html','request/index.html'].includes(p))assert.match(s,/FREE CHECKER OPEN/,p);else assert.match(s,/Customer access is not open/,p);}
 });
 test('human hero specifies a five-page audit and evidence output, without false claims',()=>{
  const home=read('index.html');
@@ -16,15 +16,14 @@ test('human hero specifies a five-page audit and evidence output, without false 
  assert.match(home,/five public product pages/);assert.match(home,/source evidence/);
  assert.doesNotMatch(home,/guaranteed|100% accurate|AI-powered real.time/ig);
 });
-test('home has one primary product action and plainly fictional comparison',()=>{
+test('home has one primary product action and clearly labeled sample comparison',()=>{
  const s=read('index.html');
  assert.match(s,/href="\/app\/"/);assert.match(s,/id="try-demo"/);
- assert.match(s,/fictional data/);assert.match(s,/Not live prices/);
- assert.match(s,/We haven't checked any retailer website/);
+ assert.match(s,/Sample data \(not live prices\)/i);
 });
 test('interactive example is accessible and uses real fail-closed engine',()=>{
  const html=read('index.html'),js=read('assets/demo-2027.mjs');
- assert.match(html,/aria-label="Choose a fictional comparison"/);
+ assert.match(html,/aria-label="Choose a product comparison"/);
  for(const x of ['match','pack','brand'])assert.match(html,new RegExp('data-demo="'+x+'"'));
  assert.match(html,/role="status" aria-live="polite"/);
  assert.match(js,/import \{evaluate\} from '.\/review-engine.mjs'/);

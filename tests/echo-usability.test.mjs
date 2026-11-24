@@ -58,7 +58,7 @@ test('F5 first paid CTA uses AUREL-approved existing human contact route; free c
 });
 test('F5 separate paid scope is not hosted monitoring, and app is still an unverified preview',()=>{
  assert.match(read('pricing/index.html'),/No automatic retailer crawling or subscription checkout/i);
- assert.match(read('index.html'),/FREE CHECKER OPEN/);
+ assert.match(read('index.html'),/Open the free comparison checker/);
  assert.match(read('app/index.html'),/No account, card or upload/);
 });
 test('F7 interim privacy note does not claim full terms',()=>{
