@@ -175,3 +175,7 @@ html{scroll-padding-top:92px}body{background:var(--paper);color:var(--ink);font-
 @media(max-width:760px){.conversion-proof{grid-template-columns:1fr}}
 /* CRO: readable policy navigation. */
 .legal-links{padding-block:12px 22px;font-size:14px;color:#fffefa}.legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+.pb-evidence-image{display:block;width:100%;height:auto;border-radius:22px}.pb-margin-form{display:grid;gap:12px;padding:24px;background:#fffefa;border:1px solid #c1cbbc;border-radius:24px}.pb-margin-form label{display:grid;gap:4px;font-weight:700}.pb-margin-form input{min-width:0;width:100%;padding:12px;border:1px solid #9bb09d;border-radius:10px;font:inherit;background:white;color:#243a33}.pb-margin-form [role=status]{overflow-wrap:anywhere;line-height:1.6;font-weight:650}.pb-margin-form .btn{justify-self:start}
+
+.pb-demo-video{display:block;width:100%;height:auto;background:#faf5ec;border:1px solid #c1cbbc;border-radius:22px}.pb-margin-form{min-inline-size:0}.pb-margin-form legend{font-weight:700;padding-inline:8px}
