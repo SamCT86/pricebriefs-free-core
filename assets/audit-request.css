@@ -18,3 +18,4 @@
 .audit-request .nexus-form-note{font-size:13px;color:#52665a;line-height:1.6;margin:0}
 @media(max-width:850px){.audit-layout{grid-template-columns:1fr;gap:24px}.audit-context{order:2;padding:0}.audit-request .page-head .lead{margin-bottom:25px}}
 @media(max-width:480px){.audit-request .nexus-audit-form{padding:18px;border-radius:18px;gap:17px}.audit-request .nexus-audit-form .hero-ctas>*{width:100%}.audit-request .page-head h1{font-size:clamp(34px,9vw,43px)}}
+@media(max-width:760px){.audit-request .page-head{padding:28px 0 40px}.audit-request .page-head h1{font-size:34px;letter-spacing:-.045em}.audit-request .page-head .lead{margin:12px 0 20px;line-height:1.5}.audit-request .nexus-audit-form{gap:15px;padding:16px}.audit-context{padding:12px 0}}
