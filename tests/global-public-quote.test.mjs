@@ -6,7 +6,7 @@ test('Global audit offer: no fixed regional currency, written quote and scope',(
   for(const s of pages){
     assert.doesNotMatch(s,/SEK\s*6,?500|Indicative price: SEK|quoted in USD|USD quote/);
     assert.match(s,/written quote in an agreed currency/);
-    assert.match(s,/five-SKU/i);
+    assert.match(s,/five-SKU|five public|five selected/i);
     assert.match(s,/https:\/\/sarmadtawfeek\.se\/#contact/);
     assert.doesNotMatch(s,/href=['"][^'"]*checkout/);
   }

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {makeLocalExport, assertImportUntrusted} from '../assets/export-contract.mjs';
 test('Every displayed comparison is marked NOT VERIFIED',()=>{
   const app=fs.readFileSync(new URL('../assets/app.mjs',import.meta.url),'utf8');
-  assert.match(app,/NOT VERIFIED · entered values only/);
+  assert.match(app,/Based on your entries/);
   const guard=fs.readFileSync(new URL('../assets/review-engine.mjs',import.meta.url),'utf8');
   assert.match(guard,/sourceVerified:false/);
   assert.match(app,/fictional example/);

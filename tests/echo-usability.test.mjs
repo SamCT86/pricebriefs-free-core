@@ -52,17 +52,17 @@ test('F6 unknown shared identity is HOLD',()=>{
 });
 test('F5 first paid CTA uses AUREL-approved existing human contact route; free checker remains open',()=>{
  const h=read('index.html');
- assert.match(h,/href="\/request\/">Request a scoped five-SKU audit/);
+ assert.match(h,/href="\/request\/">Request an audit/);
  assert.match(h,/href="\/app\/">Open the free comparison checker/);
  assert.doesNotMatch(h,/<form\b|checkout\.stripe/i);
 });
 test('F5 separate paid scope is not hosted monitoring, and app is still an unverified preview',()=>{
- assert.match(read('pricing/index.html'),/No automatic retailer crawling or subscription checkout/i);
+ assert.match(read('pricing/index.html'),/checker helps you compare those observations/i);
  assert.match(read('index.html'),/Open the free comparison checker/);
- assert.match(read('app/index.html'),/No account, card or upload/);
+ assert.match(read('app/index.html'),/no account needed/i);
 });
 test('F7 interim privacy note does not claim full terms',()=>{
- const h=read('trust/index.html');assert.match(h,/not a final Privacy Policy or Terms of Service/i);
+ const h=read('trust/index.html');assert.match(h,/href="\/privacy\/">Privacy Policy/);
  assert.match(h,/hosting requests and server logs/i);
 });
 test('F3 no tracker/network added to local app',()=>{

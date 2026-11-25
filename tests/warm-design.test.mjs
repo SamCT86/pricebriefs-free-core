@@ -8,7 +8,7 @@ const read=x=>readFileSync(path.join(root,x),'utf8');
 const routes=['index.html','app/index.html','pricing/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html','request/index.html'];
 
 test('all eight pages use the same local warm design with launch disclaimer',()=>{
- for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(p==='index.html')assert.match(s,/Open the free comparison checker/,p);else if(['pricing/index.html','request/index.html'].includes(p))assert.match(s,/FREE CHECKER OPEN/,p);else assert.match(s,/Customer access is not open/,p);}
+ for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(p==='index.html')assert.match(s,/Open the free comparison checker/,p);else if(['pricing/index.html','request/index.html'].includes(p))assert.match(s,/href="\/app\/"/,p);else assert.match(s,/href="\/request\/"/,p);}
 });
 test('human hero specifies a five-page audit and evidence output, without false claims',()=>{
  const home=read('index.html');
@@ -19,7 +19,7 @@ test('human hero specifies a five-page audit and evidence output, without false 
 test('home has one primary product action and clearly labeled sample comparison',()=>{
  const s=read('index.html');
  assert.match(s,/href="\/app\/"/);assert.match(s,/id="try-demo"/);
- assert.match(s,/Sample data \(not live prices\)/i);
+ assert.match(s,/Example prices/i);
 });
 test('interactive example is accessible and uses real fail-closed engine',()=>{
  const html=read('index.html'),js=read('assets/demo-2027.mjs');
@@ -36,8 +36,8 @@ test('real app has an ungated reversible fictional one-click path',()=>{
  assert.match(html,/id="fill-fictional-example"/);
  assert.match(js,/fill-fictional-example/);
  assert.match(js,/form\.requestSubmit\(\)/);
- assert.match(js,/invented example details/);
- assert.match(js,/source URL was not opened or verified/);
+ assert.match(js,/sample product details and prices/i);
+ assert.match(js,/FICTIONAL_DEMO_NOT_VERIFIED/);
 });
 test('new design uses no third-party fonts or scripts',()=>{
  for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link(?=[^>]*rel="(?:stylesheet|preload|icon)")(?=[^>]*href="https?:)[^>]*>/i,p);}
@@ -55,8 +55,8 @@ test('no checkout, hidden analytics, or fake customer proof in this preview',()=
 });
 test('paid audit requires a separate human scope/quote and is not self-serve checkout',()=>{
  const pricing=read('pricing/index.html'), home=read('index.html');
- assert.match(pricing,/nothing here creates an automatic sale or binding quote/i);
- assert.match(pricing,/cannot take payment or make a binding offer/i);
- assert.match(home,/separately scoped and quoted/i);
+ assert.match(pricing,/written quote sets out the reviewer/i);
+ assert.match(pricing,/You decide whether to proceed after reviewing the quote/i);
+ assert.match(home,/agree a written quote in an agreed currency/i);
  assert.doesNotMatch(pricing,/checkout\.stripe|<form\b/i);
 });

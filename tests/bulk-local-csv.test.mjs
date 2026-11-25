@@ -31,6 +31,6 @@ test('International SEO and honest public boundary',()=>{
  const home=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
  const app=fs.readFileSync(new URL('../app/index.html',import.meta.url),'utf8');
  const robots=fs.readFileSync(new URL('../robots.txt',import.meta.url),'utf8');
- assert.match(home,/twitter:card/);assert.match(home,/Project contact: /);assert.doesNotMatch(home+app,/PriceBriefs k&ouml;rs|FREE BROWSER PREVIEW/);
+ assert.match(home,/twitter:card/);assert.match(home,/Contact Sam Tawfeek/);assert.doesNotMatch(home+app,/PriceBriefs k&ouml;rs|FREE BROWSER PREVIEW/);
  assert.match(app,/id="download-fictional-csv"/);assert.match(robots,/Allow: \//);
 });

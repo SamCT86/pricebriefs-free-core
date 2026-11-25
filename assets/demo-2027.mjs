@@ -8,9 +8,9 @@ const title=document.querySelector('#demo-result-title');
 const copy=document.querySelector('#demo-result-copy');
 const icon=document.querySelector('#demo-icon');
 const scenarios=Object.freeze({
-  match:{brand:'Northstar Tools',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Same model, brand and pack.',heading:'REVIEW · Details match',body:'The details match. Check the source before changing your price.'},
-  pack:{brand:'Northstar Tools',pack:'6',condition:'new',variant:'New condition · different pack sizes',caption:'Your listing is a single kit; the other is a six-pack.',heading:'HOLD · Different pack.',body:'A $179 six-pack is not comparable to a $199 single kit. Don’t make a price move from this.'},
-  brand:{brand:'Other Brand',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Similar tool category, different manufacturer.',heading:'HOLD · Different brand.',body:'The brand does not match, even if the tool category is similar. This comparison stays on hold.'}
+  match:{brand:'Northstar Tools',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Same model, brand and pack.',heading:'REVIEW · Details match',body:'The product details line up. Confirm the offer before matching the price.'},
+  pack:{brand:'Northstar Tools',pack:'6',condition:'new',variant:'New condition · different pack sizes',caption:'Your listing is a single kit; the other is a six-pack.',heading:'HOLD · Different pack.',body:'A six-pack and a single kit are different offers. Check the quantity before matching the price.'},
+  brand:{brand:'Other Brand',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Similar tool category, different manufacturer.',heading:'HOLD · Different brand.',body:'Different manufacturers can mean different products. Check the exact model before comparing prices.'}
 });
 function scenario(input){
   const now=Date.now();const data={

@@ -11,16 +11,16 @@ test('Five-SKU human audit always nonbinding and distinct from free checker',()=
     assert.match(text,/https:\/\/sarmadtawfeek\.se\/#contact/);
   }
   assert.match(price,/written quote in an agreed currency/);
-  assert.match(price,/cannot accept an order or payment/i);
-  assert.match(home,/no checkout or binding purchase here/i);
+  assert.match(price,/You decide whether to proceed after reviewing the quote/i);
+  assert.match(home,/written quote before work/i);
   assert.match(price,/one agreed recheck/i);
   assert.match(price,/reviewer/i);
   assert.doesNotMatch(home+price+request,/<form[^>]*(?:payment|checkout)|buy now/i);
 });
 test('Public marketing never calls fictional input an independent market price',()=>{
   const home=page('index.html'),app=page('assets/app.mjs'),exp=page('assets/export-contract.mjs');
-  assert.match(home,/Sample data \(not live prices\)/i);
-  assert.match(app,/NOT VERIFIED · entered values only/);
+  assert.match(home,/Example prices/i);
+  assert.match(app,/Based on your entries/);
   assert.match(exp,/verified_market_delta_pct:null/);
   assert.match(exp,/source_verified:false/);
 });

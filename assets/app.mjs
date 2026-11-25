@@ -84,13 +84,13 @@ function showReview(rows){
     const difference=r.deltaPct!==null?
       r.deltaPct>0?'Peer lower than yours by '+r.deltaPct.toFixed(1)+'%':
       r.deltaPct<0?'Peer higher than yours by '+Math.abs(r.deltaPct).toFixed(1)+'%':'Same listed price':'';
-    return '<li><strong>Observation '+(i+1)+' · '+r.status+'</strong> <span class="unverified-label">NOT VERIFIED · entered values only</span> '+esc(difference)+'<ul>'+r.reasons.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></li>';
+    return '<li><strong>Observation '+(i+1)+' · '+r.status+'</strong> <span class="unverified-label">Based on your entries</span> '+esc(difference)+'<ul>'+r.reasons.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></li>';
   });
   const disclosure=reviewMode==='demo'
-    ?'This is a <strong>fictional example</strong>, not your own market data. No retailer facts were fetched or verified.'
+    ?'Explore this <strong>sample comparison</strong> to see how the checks work.'
     :reviewMode==='csv'
-    ?'These are your <strong>pasted CSV rows</strong>, not form entries and not verified retailer facts. Nothing was fetched.'
-    :'These are <strong>your entries</strong>, not verified retailer facts. Nothing was fetched. Review before any store decision.';
+    ?'Your <strong>CSV comparison</strong> is ready. Confirm the original offers before acting.'
+    :'Your <strong>comparison</strong> is ready. Confirm the original offers before acting.';
   result.innerHTML='<h3>'+valid+' reviewable · '+(out.results.length-valid)+' on hold</h3><p>'+disclosure+'</p><ol>'+parts.join('')+'</ol>';
   reviewedRows=rows.map(r=>({...r})); // immutable decision input for expiry recheck
   reviewedAt=new Date().toISOString();
@@ -100,7 +100,7 @@ function showReview(rows){
     rows:data.rows.map(r=>({...r,synthetic_example:true})),
     warning:'FICTIONAL DEMO ONLY. These invented values are not independent market evidence.'
   }:data;
-  exportButton.textContent=reviewMode==='demo'?'Download fictional sample JSON':'Download JSON';
+  exportButton.textContent=reviewMode==='demo'?'Download sample JSON':'Download JSON';
   exportButton.hidden=false;
 }
 function saveLocal(text,name,type){
@@ -138,7 +138,7 @@ if(form&&list&&result){
     add.disabled=false;
     [...list.querySelectorAll('fieldset')].forEach((fs,i)=>{
       const legend=fs.querySelector('legend');
-      if(legend)legend.textContent='Comparison '+(i+1)+' · entered by you, not verified by PriceBriefs';
+      if(legend)legend.textContent='Comparison '+(i+1)+' · your entries';
     });
   });
   // A blur/change event can arrive after a CSV Review click; do not invalidate a result
@@ -226,7 +226,7 @@ demoButton?.addEventListener('click',()=>{
     !['merchantCondition','peerCondition','stock','currency'].includes(k) && String(v).trim()!==''));
   const hasCsv=String(csvText?.value??'').trim()!=='';
   if(reviewMode!=='demo'&&(filled||hasCsv) &&
-    !window.confirm('This will replace your current entries with one fictional sample. Continue?'))return;
+    !window.confirm('Replace your current entries with a sample comparison?'))return;
   invalidateCurrentReview();
   list.innerHTML=rowMarkup(1); // never combine a demo with existing rows
   if(csvText)csvText.value='';
@@ -250,14 +250,14 @@ demoButton?.addEventListener('click',()=>{
   };
   const row=list.querySelector('fieldset');
   const legend=row?.querySelector('legend');
-  if(legend)legend.textContent='Fictional observation 1 · invented values, not retailer verified';
+  if(legend)legend.textContent='Sample comparison 1';
   for(const [name,value] of Object.entries(synthetic)){
     const field=row?.querySelector('[name="'+name+'"]');
     if(field)field.value=value;
   }
   form.requestSubmit();
   const notice=document.querySelector('#example-disclaimer');
-  if(notice)notice.textContent='Showing invented example details. The source URL was not opened or verified; never use this example to make a real price decision.';
+  if(notice)notice.textContent='Showing sample product details and prices. Try your own comparison when you’re ready.';
   result.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 clearDemoButton?.addEventListener('click',()=>{
@@ -268,5 +268,5 @@ clearDemoButton?.addEventListener('click',()=>{
   add.disabled=false;
   clearDemoButton.hidden=true;
   const notice=document.querySelector('#example-disclaimer');
-  if(notice)notice.textContent='Fictional example cleared. Enter your own details to check a real case — inputs are still unverified.';
+  if(notice)notice.textContent='Ready for your product details.';
 });
