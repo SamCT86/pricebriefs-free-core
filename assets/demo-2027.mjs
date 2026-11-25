@@ -8,9 +8,9 @@ const title=document.querySelector('#demo-result-title');
 const copy=document.querySelector('#demo-result-copy');
 const icon=document.querySelector('#demo-icon');
 const scenarios=Object.freeze({
-  match:{brand:'Northstar Tools',pack:'1',condition:'new',variant:'18V · 1 pack · new',caption:'Same model, brand and pack.',heading:'REVIEW · Details match',body:'The details match. Check the source before changing your price.'},
-  pack:{brand:'Northstar Tools',pack:'6',condition:'new',variant:'18V · 6 pack · new',caption:'Your listing is a single kit; the other is a six-pack.',heading:'HOLD · Different pack.',body:'A $179 six-pack is not comparable to a $199 single kit. Don’t make a price move from this.'},
-  brand:{brand:'Other Brand',pack:'1',condition:'new',variant:'18V · 1 pack · new',caption:'Same-looking item, but a different manufacturer.',heading:'HOLD · Different brand.',body:'The model description looks similar, but the brand does not match. This comparison stays on hold.'}
+  match:{brand:'Northstar Tools',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Same model, brand and pack.',heading:'REVIEW · Details match',body:'The details match. Check the source before changing your price.'},
+  pack:{brand:'Northstar Tools',pack:'6',condition:'new',variant:'New condition · different pack sizes',caption:'Your listing is a single kit; the other is a six-pack.',heading:'HOLD · Different pack.',body:'A $179 six-pack is not comparable to a $199 single kit. Don’t make a price move from this.'},
+  brand:{brand:'Other Brand',pack:'1',condition:'new',variant:'New condition · 1 kit each',caption:'Same-looking item, but a different manufacturer.',heading:'HOLD · Different brand.',body:'The model description looks similar, but the brand does not match. This comparison stays on hold.'}
 });
 function scenario(input){
   const now=Date.now();const data={
@@ -35,14 +35,14 @@ function show(which){
   result.dataset.status=outcome.status;
   result.dataset.sourceVerified='false';
   const peer=document.querySelector('#peer-image'),label=document.querySelector('#peer-pack-label');
-  if(peer&&label){const image=which==='pack'?'drill-six':which==='brand'?'drill-other':'drill-one';peer.src='/assets/'+image+'-photo.jpg';peer.alt=which==='pack'?'Photo montage of six copies of the same tool':which==='brand'?'Photograph of another cordless tool':'Photograph of a cordless tool';label.textContent=which==='pack'?'6 kits':which==='brand'?'1 kit · other brand':'1 kit';}
+  if(peer&&label){const image=which==='pack'?'drill-six':which==='brand'?'drill-other':'drill-one';peer.src='/assets/'+image+'-photo.jpg'+(which==='brand'?'':'?v=20261125-finish');peer.alt=which==='pack'?'Photo montage of six copies of the same tool':which==='brand'?'Photograph of another cordless tool':'Photograph of a cordless tool';label.textContent=which==='pack'?'6 kits':which==='brand'?'1 kit · other brand':'1 kit';}
 }
 if(group&&mini&&details&&result&&title&&copy&&icon){
   group.addEventListener('click',event=>{
     const control=event.target.closest('[data-demo]');
     if(control&&group.contains(control))show(control.dataset.demo);
   });
-  show('match');
+  show('pack');
 }
 
 const vol=document.querySelector('#risk-volume'),risk=document.querySelector('#risk-result'),units=document.querySelector('#risk-units'),big=document.querySelector('.pb-risk strong');
