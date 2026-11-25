@@ -35,7 +35,7 @@ function show(which){
   result.dataset.status=outcome.status;
   result.dataset.sourceVerified='false';
   const peer=document.querySelector('#peer-image'),label=document.querySelector('#peer-pack-label');
-  if(peer&&label){const image=which==='pack'?'drill-six':which==='brand'?'drill-other':'drill-one';peer.src='/assets/'+image+'.svg';peer.alt=which==='pack'?'Illustrative six drill kits':which==='brand'?'Illustrative different brand drill kit':'Illustrative green drill kit';label.textContent=which==='pack'?'6 kits':which==='brand'?'1 kit · other brand':'1 kit';}
+  if(peer&&label){const image=which==='pack'?'drill-six':which==='brand'?'drill-other':'drill-one';peer.src='/assets/'+image+'-photo.jpg';peer.alt=which==='pack'?'Photo montage of six copies of the same tool':which==='brand'?'Photograph of another cordless tool':'Photograph of a cordless tool';label.textContent=which==='pack'?'6 kits':which==='brand'?'1 kit · other brand':'1 kit';}
 }
 if(group&&mini&&details&&result&&title&&copy&&icon){
   group.addEventListener('click',event=>{
