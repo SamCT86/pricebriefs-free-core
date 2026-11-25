@@ -1,0 +1,35 @@
+/* PriceBriefs: quiet, responsive microinteractions. No automatic scrolling or hidden content. */
+:root{--pb-ease:cubic-bezier(.2,.65,.3,1);--pb-motion-border:#9aaa91}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .btn,.ed-home .btn{transition:transform 200ms var(--pb-ease),background-color 200ms ease,box-shadow 200ms ease,border-color 200ms ease,color 200ms ease;filter:none}
+ .btn:hover,.ed-home .btn:hover{transform:translateY(-2px);box-shadow:0 7px 18px -7px #16433355;filter:none}
+ .btn:active,.ed-home .btn:active{transform:translateY(0);box-shadow:none}
+ .links a:not(.btn),.footer-links a,.ed-link,.route,.demo-footer a{transition:color 180ms ease,text-decoration-color 180ms ease}
+ .links a:not(.btn):hover,.ed-link:hover,.route:hover,.demo-footer a:hover{color:#98582f}
+ .ed-demo .human-demo{transition:box-shadow 250ms var(--pb-ease),border-color 250ms ease}
+ .ed-demo .human-demo:hover{transform:none;border-color:#b9c1ad;box-shadow:0 22px 48px -22px #24493455}
+ .ed-demo .demo-choice{transition:background-color 180ms ease,color 180ms ease,box-shadow 180ms ease}
+ .ed-demo .demo-choice:not([aria-pressed="true"]):hover{background:#e5e9df;box-shadow:inset 0 0 0 1px #c7cfbf}
+ .ed-demo .pb-product-pair img{transition:transform 250ms var(--pb-ease),box-shadow 250ms ease}
+ .ed-demo .pb-product-pair img:hover{transform:scale(1.025);box-shadow:0 4px 12px -7px #20382e66}
+ .ed-steps li{transition:background-color 220ms ease,box-shadow 220ms ease}
+ .ed-steps li:hover{background:#f0f1e7;box-shadow:inset 0 3px #9aaa91}
+ .ed-list li{transition:color 180ms ease,background-color 180ms ease}
+ .ed-list li:hover{background:#e5e6d9;color:#164333}
+ .ed-media{transition:box-shadow 240ms var(--pb-ease),border-color 240ms ease}
+ .ed-media:hover{box-shadow:0 22px 46px -20px #16382d55;border-color:#aab6a5}
+ .ed-faq summary{transition:color 180ms ease}
+ .ed-faq summary:hover{color:#98582f}
+ .pricing-card,.tile,.grid3 .card,.text-card,.signal{transition:transform 220ms var(--pb-ease),box-shadow 220ms ease,border-color 220ms ease}
+ .pricing-card:hover,.tile:hover,.grid3 .card:hover,.text-card:hover{transform:translateY(-3px);border-color:var(--pb-motion-border);box-shadow:0 14px 30px -18px #24493466}
+ .signal:hover{border-color:var(--pb-motion-border);box-shadow:0 8px 18px -14px #24493466}
+ .nexus-audit-form :is(input,textarea,select){transition:border-color 180ms ease,box-shadow 180ms ease}
+}
+.ed-demo .demo-choice:focus-visible{outline:2px solid #98582f;outline-offset:2px}
+.nexus-audit-form :is(input,textarea,select):focus{border-color:#668575;box-shadow:0 0 0 3px #66857522}
+@media (prefers-reduced-motion:reduce){
+ .btn,.ed-home .btn,.ed-demo .human-demo,.ed-demo .demo-choice,.ed-demo .pb-product-pair img,.ed-steps li,.ed-list li,.ed-media,.pricing-card,.tile,.grid3 .card,.text-card,.signal,.nexus-audit-form :is(input,textarea,select){transition:none!important;animation:none!important;transform:none!important}
+}
+@media (hover:none),(pointer:coarse){
+ .btn:hover,.ed-home .btn:hover,.tile:hover,.human-demo:hover,.pricing-card:hover{transform:none}
+}

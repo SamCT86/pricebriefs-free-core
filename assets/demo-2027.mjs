@@ -41,7 +41,17 @@ function show(which){
 if(group&&mini&&details&&result&&title&&copy&&icon){
   group.addEventListener('click',event=>{
     const control=event.target.closest('[data-demo]');
-    if(control&&group.contains(control))show(control.dataset.demo);
+    if(control&&group.contains(control)){
+      const changed=control.getAttribute('aria-pressed')!=='true';
+      show(control.dataset.demo);
+      if(changed&&window.matchMedia('(prefers-reduced-motion: no-preference)').matches){
+        for(const el of [document.querySelector('#peer-image'),result]){
+          if(!el||typeof el.animate!=='function')continue;
+          el.getAnimations().forEach(animation=>animation.cancel());
+          el.animate([{opacity:.72},{opacity:1}],{duration:200,easing:'ease-out'});
+        }
+      }
+    }
   });
   show('pack');
 }
