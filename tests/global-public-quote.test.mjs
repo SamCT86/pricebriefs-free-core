@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const pages=['index.html','pricing/index.html','request/index.html'].map(x=>fs.readFileSync(new URL('../'+x,import.meta.url),'utf8'));
-test('Global audit offer: SEK indicative reference, no binding price, written quote and scope',()=>{
+test('Global audit offer: USD indicative reference, no binding price, written quote and scope',()=>{
   for(const s of pages){
-    assert.match(s,/SEK\s*6,500/);
+    assert.match(s,/US\$649/);
     assert.match(s,/indicative/i);
-    assert.match(s,/excl\. VAT/);
+    assert.match(s,/excl\. applicable taxes/);
     assert.doesNotMatch(s,/quoted in USD|USD quote/);
     assert.match(s,/written quote in an agreed currency/);
     assert.match(s,/five-SKU|five public|five selected/i);
