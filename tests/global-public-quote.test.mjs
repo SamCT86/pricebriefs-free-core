@@ -4,7 +4,7 @@ import fs from 'node:fs';
 const pages=['index.html','pricing/index.html','request/index.html'].map(x=>fs.readFileSync(new URL('../'+x,import.meta.url),'utf8'));
 test('Global audit offer: USD indicative reference, no binding price, written quote and scope',()=>{
   for(const s of pages){
-    assert.match(s,/US\$649/);
+    assert.match(s,/(?:US\$649|class="plan-amount">\$649<\/span>\s*<span class="plan-currency">USD<\/span>)/);
     assert.match(s,/indicative/i);
     assert.match(s,/excl\. applicable taxes/);
     assert.doesNotMatch(s,/quoted in USD|USD quote/);

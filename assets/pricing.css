@@ -31,3 +31,15 @@
 .plan-features{padding-top:16px;gap:9px;margin-bottom:20px}
 @media(max-width:760px){.pricing-page .pricing-intro.page-head{padding:30px 0 24px}.pricing-page .pricing-intro.page-head h1{font-size:clamp(32px,8vw,44px)}}
 @media(max-width:760px){.pricing-intro.page-head{padding:28px 0 24px}.pricing-intro h1{font-size:34px;line-height:1.13}.pricing-intro .lead{font-size:16px}.pricing-card{padding:20px}.pricing-card .plan-description{min-height:0}}
+
+/* Price clarity: amount first, frequency and scope next. */
+.pricing-card .plan-price-block{margin:4px 0 20px;padding:0 0 18px;border-bottom:1px solid #d9dfd3}
+.pricing-card .plan-price{display:flex;align-items:baseline;gap:9px;margin:0 0 5px;font-family:inherit;line-height:1;letter-spacing:0;color:#24473b}
+.pricing-card .plan-price .plan-amount{display:inline;font:750 clamp(48px,6.2vw,76px)/1.05 "Segoe UI",system-ui,sans-serif;letter-spacing:-.055em;color:#24473b;margin:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pricing-card .plan-price .plan-currency{display:inline;font:650 15px/1.2 "Segoe UI",system-ui,sans-serif;letter-spacing:.03em;color:#52665a;margin:0}
+.pricing-card .plan-frequency{font-size:16px;font-weight:700;color:#24473b;margin:0 0 3px;line-height:1.35}
+.pricing-card .plan-tax{font-size:13px;color:#52665a;margin:0;line-height:1.4}
+.pricing-card .plan-scope{font-size:15px;line-height:1.45;color:#354f44;margin:13px 0 0}
+.pricing-card .plan-scope strong{font-weight:750;color:#24473b}
+.pricing-card .plan-description{min-height:0}
+@media(max-width:760px){.pricing-card .plan-price .plan-amount{font-size:56px}.pricing-card .plan-price-block{margin-bottom:16px;padding-bottom:14px}}
