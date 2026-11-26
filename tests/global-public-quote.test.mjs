@@ -2,9 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const pages=['index.html','pricing/index.html','request/index.html'].map(x=>fs.readFileSync(new URL('../'+x,import.meta.url),'utf8'));
-test('Global audit offer: no fixed regional currency, written quote and scope',()=>{
+test('Global audit offer: SEK indicative reference, no binding price, written quote and scope',()=>{
   for(const s of pages){
-    assert.doesNotMatch(s,/SEK\s*6,?500|Indicative price: SEK|quoted in USD|USD quote/);
+    assert.match(s,/SEK\s*6,500/);
+    assert.match(s,/indicative/i);
+    assert.match(s,/excl\. VAT/);
+    assert.doesNotMatch(s,/quoted in USD|USD quote/);
     assert.match(s,/written quote in an agreed currency/);
     assert.match(s,/five-SKU|five public|five selected/i);
     assert.match(s,/https:\/\/sarmadtawfeek\.se\/#contact/);
