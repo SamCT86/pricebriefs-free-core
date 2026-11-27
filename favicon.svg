@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PriceBriefs">
+<rect width="64" height="64" rx="14" fill="#0F1418"/>
+<path d="M17 15h14c10 0 16 5 16 15s-6 15-16 15h-5v6h-9zm9 9v12h5c5 0 7-2 7-6s-2-6-7-6z" fill="#E6EAF0"/>
+<circle cx="45" cy="45" r="5" fill="#62D6A4"/>
+</svg>

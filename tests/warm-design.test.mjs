@@ -1,62 +1,98 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const read=x=>readFileSync(path.join(root,x),'utf8');
-const routes=['index.html','app/index.html','pricing/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html','request/index.html'];
-
-test('all eight pages use the same local warm design with launch disclaimer',()=>{
- for(const p of routes){const s=read(p);assert.match(s,/href="\/assets\/warm-2027\.css"/,p);if(['index.html','pricing/index.html','request/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html'].includes(p))assert.match(s,/index,follow/,p);else assert.match(s,/noindex,nofollow/,p);if(p==='index.html')assert.match(s,/Open the free comparison checker/,p);else if(['pricing/index.html','request/index.html'].includes(p))assert.match(s,/href="\/app\/"/,p);else assert.match(s,/href="\/request\/"/,p);}
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const original=['index.html','app/index.html','pricing/index.html','product/index.html','how-it-works/index.html','trust/index.html','sample-brief/index.html','request/index.html'];
+const precision=['index.html','agency/index.html','guides/price-mismatch/index.html'];
+test('existing eight routes retain public and local checker boundaries',()=>{
+  for(const p of original){
+    const s=read(p);
+    assert.match(s,/href="\/assets\/site\.css"/,p);
+    if(p==='app/index.html')assert.match(s,/noindex,nofollow/);
+    else assert.match(s,/index,follow/);
+    if(p==='index.html')assert.match(s,/Open the free comparison checker/);
+    else if(['pricing/index.html','request/index.html'].includes(p))assert.match(s,/href="\/app\/"/);
+    else assert.match(s,/href="\/request\/"/);
+  }
 });
-test('human hero specifies a five-page audit and evidence output, without false claims',()=>{
- const home=read('index.html');
- assert.match(home,/Find product-data mismatches/);assert.match(home,/before your next campaign/);
- assert.match(home,/five public product pages/);assert.match(home,/source evidence/);
- assert.doesNotMatch(home,/guaranteed|100% accurate|AI-powered real.time/ig);
+test('Precision Instrument replaces generic audit hero with honest problem-led entry',()=>{
+  const s=read('index.html');
+  assert.match(s,/Wrong product prices or shopping ad issues\?/);
+  assert.match(s,/id="pi-product-url"/);
+  assert.match(s,/Check URL format/);
+  assert.match(s,/does not visit your store or inspect live prices/);
+  assert.match(s,/FICTIONAL EXAMPLE/);
+  assert.match(s,/Open the free comparison checker/);
+  assert.match(s,/US\$649/);
+  assert.match(s,/written quote in an agreed currency/);
+  assert.doesNotMatch(s,/guaranteed savings|AI-powered real.time|three verified findings|100% accurate/i);
 });
-test('home has one primary product action and clearly labeled sample comparison',()=>{
- const s=read('index.html');
- assert.match(s,/href="\/app\/"/);assert.match(s,/id="try-demo"/);
- assert.match(s,/Example prices/i);
+test('evidence console shows only unverified fictional states, never paid hidden facts',()=>{
+  const h=read('index.html'),js=read('assets/precision-instrument.mjs'),contract=read('assets/precision-ui-contract.mjs');
+  assert.match(h,/aria-label="Choose a fictional evidence scenario"/);
+  for(const key of ['match','pack','missing'])assert.match(h,new RegExp('data-pi-scenario="'+key+'"'));
+  assert.match(h,/role="status" aria-live="polite"/);
+  assert.match(js,/evaluateFictionalScenario/);
+  assert.match(contract,/import \{evaluate,sourceLooksPublicHttps\}/);
+  assert.match(contract,/sourceVerified:output\.sourceVerified/);
+  assert.doesNotMatch(h,/blur\(4px\)|Unlock the hidden|guaranteed/i);
 });
-test('interactive example is accessible and uses real fail-closed engine',()=>{
- const html=read('index.html'),js=read('assets/demo-2027.mjs');
- assert.match(html,/aria-label="Choose a product comparison"/);
- for(const x of ['match','pack','brand'])assert.match(html,new RegExp('data-demo="'+x+'"'));
- assert.match(html,/role="status" aria-live="polite"/);
- assert.match(js,/import \{evaluate\} from '.\/review-engine.mjs'/);
- assert.match(js,/peerPack:input.pack/);assert.match(js,/peerBrand:input.brand/);
- assert.match(js,/sourceVerified/);
+test('free local checker and inquiry still have functional navigation',()=>{
+  assert.match(read('index.html'),/href="\/app\/"/);
+  assert.match(read('index.html'),/href="\/request\/"/);
+  assert.match(read('app/index.html'),/id="review-form"/);
+  assert.match(read('request/index.html'),/mailto:hello@pricebriefs\.com/);
 });
-test('demo has no network or storage',()=>assert.doesNotMatch(read('assets/demo-2027.mjs'),/\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon|WebSocket/));
-test('real app has an ungated reversible fictional one-click path',()=>{
- const html=read('app/index.html'),js=read('assets/app.mjs');
- assert.match(html,/id="fill-fictional-example"/);
- assert.match(js,/fill-fictional-example/);
- assert.match(js,/form\.requestSubmit\(\)/);
- assert.match(js,/sample product details and prices/i);
- assert.match(js,/FICTIONAL_DEMO_NOT_VERIFIED/);
+test('agency and price mismatch entries are standalone truthful pages',()=>{
+  const a=read('agency/index.html'),g=read('guides/price-mismatch/index.html');
+  assert.match(a,/client issue your usual tools cannot explain/i);
+  assert.match(a,/No invented capacity or partner results/);
+  assert.match(g,/public price difference is a candidate observation/i);
+  assert.match(g,/Merchant Center rejection/);
+  for(const p of precision){
+    const s=read(p);
+    assert.match(s,/href="\/assets\/precision-instrument\.css\?v=20261126-v5"/,p);
+    assert.match(s,/href="\/request\/"/,p);
+    assert.match(s,/href="\/assets\/site\.css"/,p);
+  }
 });
-test('new design uses no third-party fonts or scripts',()=>{
- for(const p of routes){const s=read(p);assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);assert.doesNotMatch(s,/<link(?=[^>]*rel="(?:stylesheet|preload|icon)")(?=[^>]*href="https?:)[^>]*>/i,p);}
- const css=read('assets/warm-2027.css');
- assert.doesNotMatch(css,/@import|url\s*\(\s*['"]?https?:/i);
+test('no third party scripts, web analytics, checkout, fictional client testimonials or data exfiltration',()=>{
+  for(const p of [...new Set([...original,...precision])]){
+    const s=read(p);
+    assert.doesNotMatch(s,/<script[^>]+src="https?:/i,p);
+    assert.doesNotMatch(s,/(?:checkout\.stripe|trusted by 5,000|10,000\+ customers|google-analytics|mixpanel)/i,p);
+  }
+  for(const p of ['assets/precision-ui-contract.mjs']){
+    const s=read(p);
+    assert.doesNotMatch(s,/\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon|WebSocket/i,p);
+  assert.doesNotMatch(read('assets/precision-instrument.mjs'),/XMLHttpRequest|localStorage|sessionStorage|sendBeacon|WebSocket|fetch\(['"]https?:/i);
+  assert.match(read('assets/precision-instrument.mjs'),/fetch\(['"]\/api\/precheck/);
+  }
+  assert.doesNotMatch(read('assets/precision-instrument.css'),/@import|url\s*\(\s*['"]?https?:/i);
 });
-test('warm site remains accessible on reduced-motion and focus',()=>{
- const css=read('assets/warm-2027.css');
- assert.match(css,/prefers-reduced-motion/);
- assert.match(read('assets/site.css'),/:focus-visible/);
- assert.match(read('index.html'),/class="skip"/);
+test('keyboard navigation, live announcements and reduced motion supported',()=>{
+  const h=read('index.html'),css=read('assets/precision-instrument.css');
+  assert.match(h,/class="skip"/);
+  assert.match(h,/for="pi-product-url"/);
+  assert.match(h,/aria-describedby="pi-url-help pi-status"/);
+  assert.match(h,/role="status" aria-live="polite"/);
+  assert.match(css,/:focus-visible/);
+  assert.match(css,/prefers-reduced-motion/);
+  assert.match(css,/min-height:44px/);
+  assert.match(css,/@media\(max-width:760px\)/);
 });
-test('no checkout, hidden analytics, or fake customer proof in this preview',()=>{
- for(const p of routes){const s=read(p);assert.doesNotMatch(s,/checkout\.stripe\.com|google-analytics|segment\.com|mixpanel\.com|10,000\+ customers|trusted by 5,000/i,p);}
+test('existing free checker retains existing fictional one-click path',()=>{
+  const h=read('app/index.html'),js=read('assets/app.mjs');
+  assert.match(h,/id="fill-fictional-example"/);
+  assert.match(js,/form\.requestSubmit\(\)/);
+  assert.match(js,/FICTIONAL_DEMO_NOT_VERIFIED/);
 });
-test('paid audit requires a separate human scope/quote and is not self-serve checkout',()=>{
- const pricing=read('pricing/index.html'), home=read('index.html');
- assert.match(pricing,/written quote sets out the reviewer/i);
- assert.match(pricing,/You decide whether to proceed after reviewing the quote/i);
- assert.match(home,/agree a written quote in an agreed currency/i);
- assert.doesNotMatch(pricing,/checkout\.stripe|<form\b/i);
+test('price scope remains a human-reviewed written quote, not self-serve purchase',()=>{
+  const h=read('index.html'),p=read('pricing/index.html'),req=read('request/index.html');
+  assert.match(h,/US\$649/);
+  assert.match(h,/five-SKU/i);
+  assert.match(h,/written quote in an agreed currency/);
+  assert.match(p,/You decide whether to proceed after reviewing the quote/i);
+  assert.match(req,/Nothing is sent until you send it/);
+  assert.doesNotMatch(h+req,/<form\b|checkout\.stripe/i);
 });

@@ -24,5 +24,5 @@ test('price and product claims include brand, pack and honest local review bound
  assert.match(read('product/index.html'),/brand, category, variant, pack size and condition/);
  assert.match(read('pricing/index.html'),/Manual entry or local CSV import/);
  assert.match(read('app/index.html'),/This runs locally/);
- assert.match(read('README.md'),/124 tests/);
+ assert.match(read('README.md'),/250 tests/);
 });
