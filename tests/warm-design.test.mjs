@@ -23,7 +23,7 @@ test('Precision Instrument replaces generic audit hero with honest problem-led e
   assert.match(s,/does not visit your store or inspect live prices/);
   assert.match(s,/FICTIONAL EXAMPLE/);
   assert.match(s,/Open the free comparison checker/);
-  assert.match(s,/US\$649/);
+  assert.match(s,/US\$349/);
   assert.match(s,/written quote in an agreed currency/);
   assert.doesNotMatch(s,/guaranteed savings|AI-powered real.time|three verified findings|100% accurate/i);
 });
@@ -89,7 +89,7 @@ test('existing free checker retains existing fictional one-click path',()=>{
 });
 test('price scope remains a human-reviewed written quote, not self-serve purchase',()=>{
   const h=read('index.html'),p=read('pricing/index.html'),req=read('request/index.html');
-  assert.match(h,/US\$649/);
+  assert.match(h,/US\$349/);
   assert.match(h,/five-SKU/i);
   assert.match(h,/written quote in an agreed currency/);
   assert.match(p,/You decide whether to proceed after reviewing the quote/i);
