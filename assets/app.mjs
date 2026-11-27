@@ -29,7 +29,7 @@ function invalidateCurrentReview(){
   if(exportButton)exportButton.hidden=true;
   if(hadReview&&result){
     result.hidden=false;result.classList.add('hold');
-    result.innerHTML='<h3>Details changed — check again</h3><p>Previous results are no longer current. Check these inputs again before exporting.</p>';
+    result.innerHTML='<h3>Details changed — check again</h3><p>Run the check again to update your results before downloading.</p>';
   }
 }
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -42,7 +42,7 @@ const labels=Object.freeze({
  merchantVariant:'Your exact variant',peerVariant:'Other listing variant',
  merchantPack:'Your pack count',peerPack:'Other listing pack count',
  merchantPrice:'Your price',peerPrice:'Other listing price',
- sourceUrl:'Other listing source URL (HTTPS)',observedAt:'When you observed the other listing'
+ sourceUrl:'Other product page URL (HTTPS)',observedAt:'When you observed the other listing'
 });
 const textInput=name=>{
  const title=labels[name];
@@ -55,17 +55,17 @@ const textInput=name=>{
 };
 const condition=name=>'<label class="field">'+(name==='merchantCondition'?'Your':'Other listing')+' condition<select name="'+name+'"><option value="unknown">Unknown — HOLD</option><option value="new">New</option><option value="refurbished">Refurbished</option><option value="used">Used</option></select></label>';
 const otherField=name=>name==='merchantCondition'||name==='peerCondition'?condition(name):
- name==='stock'?'<label class="field">Other listing stock<select name="stock"><option value="unknown">Unknown — HOLD</option><option value="in_stock">In stock (you checked)</option><option value="out_of_stock">Out of stock</option></select></label>':
+ name==='stock'?'<label class="field">Stock on the other listing<select name="stock"><option value="unknown">Unknown — HOLD</option><option value="in_stock">In stock (you checked)</option><option value="out_of_stock">Out of stock</option></select></label>':
  name==='currency'?'<label class="field">Currency (same for both prices)<select name="currency"><option value="" selected disabled>Choose currency</option><option>USD</option><option>EUR</option><option>GBP</option><option>SEK</option></select></label>':
  textInput(name);
 const group=(heading,hint,keys)=>
  '<section class="review-group" aria-label="'+esc(heading)+'"><h4>'+esc(heading)+'</h4><p class="review-hint">'+esc(hint)+'</p><div class="form-grid">'+keys.map(otherField).join('')+'</div></section>';
-const rowMarkup=i=>'<fieldset class="form"><legend><strong>Comparison '+i+'</strong> · you enter the details; PriceBriefs does not fetch them</legend>'+
- group('1 · Your product','Start with one product. Use an ID issued by the manufacturer, such as MPN or GTIN; do not use your private store SKU.',
+const rowMarkup=i=>'<fieldset class="form"><legend><strong>Comparison '+i+'</strong> · enter the details you collected</legend>'+
+ group('1 · Your product','Start with the manufacturer’s product ID (MPN or GTIN), rather than your own store SKU.',
  ['merchantSku','merchantBrand','merchantType','merchantVariant','merchantPack','merchantCondition','merchantPrice'])+
- group('2 · The other listing','Enter the same type of manufacturer ID, not the other shop’s internal SKU. Different or unknown identifiers stay on HOLD.',
+ group('2 · The other listing','Use the same type of manufacturer ID on the other listing. A missing or different ID triggers HOLD.',
  ['peerSku','peerBrand','peerType','peerVariant','peerPack','peerCondition','peerPrice'])+
- group('3 · Source, stock and time','Check the other listing yourself. The URL is only checked for syntax; stock, taxes, delivery and the retailer price are never verified by this tool.',
+ group('3 · Source, stock and time','Confirm the other listing’s price, availability, taxes and delivery. The checker validates URL format only.',
  ['sourceUrl','observedAt','stock','currency'])+
  '<div class="row-actions"><button type="button" class="btn ghost" data-remove-comparison>Remove this comparison</button></div></fieldset>';
 
@@ -76,20 +76,20 @@ function showReview(rows){
   reviewSnapshot=currentSnapshot();
   result.classList.toggle('hold',out.status!=='OK'||out.results.some(r=>r.status==='HOLD'));
   if(out.status!=='OK'){
-    result.innerHTML='<h3>HOLD — scope exceeded</h3><p>'+esc(out.reason)+'</p>';
+    result.innerHTML='<h3>HOLD — comparison limit reached</h3><p>'+esc(out.reason)+'</p>';
     exportButton.hidden=true;lastExport=null;return;
   }
   const valid=out.results.filter(r=>r.status==='REVIEW').length;
   const parts=out.results.map((r,i)=>{
     const difference=r.deltaPct!==null?
-      r.deltaPct>0?'Peer lower than yours by '+r.deltaPct.toFixed(1)+'%':
-      r.deltaPct<0?'Peer higher than yours by '+Math.abs(r.deltaPct).toFixed(1)+'%':'Same listed price':'';
+      r.deltaPct>0?'Other price is lower by '+r.deltaPct.toFixed(1)+'%':
+      r.deltaPct<0?'Other price is higher by '+Math.abs(r.deltaPct).toFixed(1)+'%':'Same listed price':'';
     return '<li><strong>Observation '+(i+1)+' · '+r.status+'</strong> <span class="unverified-label">Based on your entries</span> '+esc(difference)+'<ul>'+r.reasons.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></li>';
   });
   const disclosure=reviewMode==='demo'
-    ?'Explore this <strong>sample comparison</strong> to see how the checks work.'
+    ?'See how the checker evaluates this <strong>sample comparison</strong>.'
     :reviewMode==='csv'
-    ?'Your <strong>CSV comparison</strong> is ready. Confirm the original offers before acting.'
+    ?'Your <strong>CSV results</strong> are ready. Confirm the original offers before acting.'
     :'Your <strong>comparison</strong> is ready. Confirm the original offers before acting.';
   result.innerHTML='<h3>'+valid+' reviewable · '+(out.results.length-valid)+' on hold</h3><p>'+disclosure+'</p><ol>'+parts.join('')+'</ol>';
   reviewedRows=rows.map(r=>({...r})); // immutable decision input for expiry recheck
@@ -188,7 +188,7 @@ if(form&&list&&result){
     try{showReview(parsePriceBriefsCsv(csvText?.value??''));}
     catch(e){
       result.hidden=false;result.classList.add('hold');
-      result.innerHTML='<h3>CSV needs attention</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Download the 18-column template and paste 1–500 complete rows. Your data stays in this browser.</p>';
+      result.innerHTML='<h3>Fix the CSV and try again</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Use the 18-column template, then paste 1–500 complete rows. Your data stays in your browser.</p>';
       // Preserve the input snapshot for a failed parse, too. A delayed blur
       // with unchanged input cannot erase the diagnostic; edits still can.
       reviewSnapshot=currentSnapshot();
@@ -208,7 +208,7 @@ if(form&&list&&result){
       fresh.results.some((r,i)=>r.status!==lastExport.rows[i].review_status||
         r.deltaPct!==lastExport.rows[i].delta_pct)){
       invalidateCurrentReview();
-      result.innerHTML='<h3>Review expired — check again</h3><p>The observation date or another time-dependent condition no longer matches the earlier result. Re-run the check before exporting.</p>';
+      result.innerHTML='<h3>Review expired — check again</h3><p>The earlier result is no longer current. Update the observation and check again before downloading.</p>';
       return;
     }
     const filename=reviewMode==='demo'?'pricebriefs-FICTIONAL-example.json':'pricebriefs-unverified-local-review.json';
@@ -257,7 +257,7 @@ demoButton?.addEventListener('click',()=>{
   }
   form.requestSubmit();
   const notice=document.querySelector('#example-disclaimer');
-  if(notice)notice.textContent='Showing sample product details and prices. Try your own comparison when you’re ready.';
+  if(notice)notice.textContent='Sample data loaded. Select “Use my own details” to start your comparison.';
   result.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 clearDemoButton?.addEventListener('click',()=>{

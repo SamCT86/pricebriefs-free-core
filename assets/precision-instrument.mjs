@@ -55,7 +55,7 @@ function check(){
   options.hidden=!result.ok;
   if(result.ok){
     const note=el('#pi-verified-options .pi-status-copy');
-    if(note)note.textContent='No page was fetched. Use the browser-local checker, or prepare an email request.';
+    if(note)note.textContent='No page was fetched. Compare your own product details or prepare an email request for an audit.';
     lastUrl=result.normalized;
     const href=emailDraftForUrl(result.normalized);if(href)draft.href=href;
     if(PUBLIC_SOURCE_ENABLED)void discoverSourceCapability(lastUrl,token);
@@ -136,7 +136,7 @@ async function readApprovedSource(){
   }catch{
     if(token!==revision||url!==lastUrl)return;
     write('#pi-source-state','HOLD');
-    write('#pi-source-summary','The source check did not finish. No live price or case resolution is claimed.');
+    write('#pi-source-summary','The source check did not finish. Try the local checker or request an audit; no live price or fix was verified.');
   }finally{
     clearTimeout(timeout);
     // A completed OLD request must never unlock the button of a NEW request.
@@ -215,10 +215,10 @@ function choose(key){
   label.textContent=result.status;
   title.textContent=result.title;
   description.textContent=result.status==='HOLD'?
-    'The supplied fields are insufficient or inconsistent; do not compare prices.':
-    'Supplied details look comparable. This is a review candidate, not verified market evidence.';
+    'Check the highlighted details before comparing prices.':
+    'The entered details line up. Confirm the original offer before acting.';
   reason.textContent='FICTIONAL EXAMPLE ONLY. '+result.reasons.join(' ')+
-    ' No actual source or merchant account was inspected.';
+    ' No live source or merchant account was checked.';
 }
 if(demo&&card&&label&&title&&description&&reason){
   demo.addEventListener('click',event=>{

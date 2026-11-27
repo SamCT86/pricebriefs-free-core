@@ -1,9 +1,9 @@
 /* Browser-local presentation contract. Syntax-only URL check, never a live scan. */
 import {evaluate,sourceLooksPublicHttps} from './review-engine.mjs';
 const samples=Object.freeze({
-  match:{brand:'Fictional Tools',pack:'1',source:'https://pricebriefs.com/demo/fictional-observation',title:'Comparable product fields'},
-  pack:{brand:'Fictional Tools',pack:'6',source:'https://pricebriefs.com/demo/fictional-observation',title:'Pack sizes conflict'},
-  missing:{brand:'Fictional Tools',pack:'1',source:'',title:'No supported source URL'}
+  match:{brand:'Fictional Tools',pack:'1',source:'https://pricebriefs.com/demo/fictional-observation',title:'Product details line up'},
+  pack:{brand:'Fictional Tools',pack:'6',source:'https://pricebriefs.com/demo/fictional-observation',title:'Pack sizes differ'},
+  missing:{brand:'Fictional Tools',pack:'1',source:'',title:'Source URL missing or invalid'}
 });
 export function checkProductPageUrl(value){
   if(typeof value!=='string'||value.length>1024||/[\u0000-\u001f\u007f]/.test(value))return {ok:false,reason:'Enter a single public HTTPS product URL, without credentials.'};
@@ -11,13 +11,13 @@ export function checkProductPageUrl(value){
   if(!sourceLooksPublicHttps(raw))return {ok:false,reason:'Enter a public HTTPS product URL. Private, example and account-only hosts are not supported.'};
   const u=new URL(raw);
   if(u.protocol!=='https:'||u.username||u.password||u.hash||u.port)return {ok:false,reason:'Remove URL credentials, fragments or nonstandard ports.'};
-  return {ok:true,normalized:u.href,reason:'URL syntax looks public. This page was not fetched; no live price or stock check occurred.'};
+  return {ok:true,normalized:u.href,reason:'Link format accepted. The page was not fetched. Compare your own product details or request an audit.'};
 }
 export function emailDraftForUrl(raw){
   const check=checkProductPageUrl(raw);
   if(!check.ok)return null;
   const subject='PriceBriefs product evidence request';
-  const body=['Hello PriceBriefs,','','I would like to ask about a scoped product-data review.','Public product URL: '+check.normalized,'Store/market: To be agreed','Observed issue: To be described','','Please confirm available sources, scope, reviewer, price and timing in a written quote.','I understand nothing has been submitted until I send this message.'].join('\n');
+  const body=['Hello PriceBriefs,','','I would like help reviewing a product-data or pricing issue.','Public product URL: '+check.normalized,'Store/market: To be agreed','Observed issue: To be described','','Please confirm the sources, scope, reviewer, price and timing in a written quote.','I understand nothing has been submitted until I send this message.'].join('\n');
   return 'mailto:hello@pricebriefs.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 }
 export function evaluateFictionalScenario(which,now=Date.now()){

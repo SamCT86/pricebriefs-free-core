@@ -17,7 +17,7 @@ test('existing eight routes retain public and local checker boundaries',()=>{
 });
 test('Precision Instrument replaces generic audit hero with honest problem-led entry',()=>{
   const s=read('index.html');
-  assert.match(s,/Wrong product prices or shopping ad issues\?/);
+  assert.match(s,/Don’t lower your price for the wrong product\./);
   assert.match(s,/id="pi-product-url"/);
   assert.match(s,/Check URL format/);
   assert.match(s,/does not visit your store or inspect live prices/);
@@ -46,8 +46,8 @@ test('free local checker and inquiry still have functional navigation',()=>{
 test('agency and price mismatch entries are standalone truthful pages',()=>{
   const a=read('agency/index.html'),g=read('guides/price-mismatch/index.html');
   assert.match(a,/client issue your usual tools cannot explain/i);
-  assert.match(a,/No invented capacity or partner results/);
-  assert.match(g,/public price difference is a candidate observation/i);
+  assert.match(a,/we first agree the scope, rights, pricing and capacity/i);
+  assert.match(g,/public price difference alone does not establish a Google Merchant Center rejection/i);
   assert.match(g,/Merchant Center rejection/);
   for(const p of precision){
     const s=read(p);
@@ -96,3 +96,5 @@ test('price scope remains a human-reviewed written quote, not self-serve purchas
   assert.match(req,/Nothing is sent until you send it/);
   assert.doesNotMatch(h+req,/<form\b|checkout\.stripe/i);
 });
+
+test('V10 customer-facing copy leads with value without implying a verified source or completed enquiry',()=>{const h=read('index.html'),a=read('agency/index.html'),t=read('thanks/index.html');assert.match(h,/Check the match\.<br><em>Protect your margin\.<\/em>/);assert.match(h,/No page was fetched/);assert.match(h,/human-reviewed audit/);assert.match(a,/we first agree the scope, rights, pricing and capacity/i);assert.match(t,/Ready to send your audit request\?/);assert.match(t,/not proof of delivery/);assert.match(t,/After we receive your request/);assert.doesNotMatch(t,/Thank you for your inquiry/);});
