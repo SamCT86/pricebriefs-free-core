@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#FAFAF8"><title>A little less guesswork · Free PriceBriefs checker</title>
+<meta name="theme-color" content="#f6f3eb"><title>A little less guesswork · Free PriceBriefs checker</title>
 <meta name="description" content="Review up to 500 user-entered CSV observations or six manual comparisons locally in your browser. No upload or account required."><meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/warm-2027.css"><link rel="stylesheet" href="/assets/motion.css?v=20261125-motion"><link rel="stylesheet" href="/assets/precision-instrument.css?v=20261126-v5">
 <link rel="stylesheet" href="/assets/precision-global-v5.css?v=20261127-s26">
 <link rel="stylesheet" href="/assets/creative-v6.css?v=1">
 <link rel="stylesheet" href="/assets/human-v7.css?v=1">
+<link rel="stylesheet" href="/assets/unified-v9.css?v=20261127-v9">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
-<body class="pi v5-compat v7-page"><noscript><div class="noscript-note"><p>PriceBriefs uses JavaScript for its free, browser-local comparison checker. You can still learn <a href="/how-it-works/">how it works</a> and <a href="/product/">what it does</a> without JavaScript.</p></div></noscript><a class="skip" href="#main">Skip to content</a>
+<body class="pi v5-compat v7-page pb-v9"><noscript><div class="noscript-note"><p>PriceBriefs uses JavaScript for its free, browser-local comparison checker. You can still learn <a href="/how-it-works/">how it works</a> and <a href="/product/">what it does</a> without JavaScript.</p></div></noscript><a class="skip" href="#main">Skip to content</a>
 
 <header class="pi-header"><div class="pi-shell pi-topline">
-<a class="pi-brand" href="/" aria-label="PriceBriefs home"><img class="v6-brand-mark" src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true"><span class="v6-wordmark">PriceBriefs</span><span class="pi-brand-sep" aria-hidden="true">/</span><span class="pi-brand-sub">Evidence Desk</span></a>
-<nav class="pi-nav" aria-label="Main navigation"><a href="/how-it-works/">How it works</a><a href="/agency/">For agencies</a><a href="/pricing/">Pricing</a><a href="/trust/">Trust &amp; data</a></nav>
+<a class="pi-brand" href="/" aria-label="PriceBriefs home"><img class="v6-brand-mark" src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true"><span class="v6-wordmark">PriceBriefs</span></a>
+<nav class="pi-nav" aria-label="Main navigation"><a href="/app/" aria-current="page">Free checker</a><a href="/how-it-works/">How it works</a><a href="/agency/">For agencies</a><a href="/pricing/">Pricing</a><a href="/trust/">Trust &amp; data</a></nav>
 <a class="pi-quiet-link pi-desktop" href="/request/">Request an audit</a>
 <details class="pi-mobile-nav"><summary>Menu</summary><nav aria-label="Mobile navigation"><a href="/how-it-works/">How it works</a><a href="/agency/">For agencies</a><a href="/pricing/">Pricing</a><a href="/trust/">Trust &amp; data</a><a href="/request/">Request an audit</a><a href="/app/" aria-current="page">Free checker</a></nav></details>
 </div></header>
-<main id="main"><section class="page-head"><div class="wrap"><p class="eyebrow">Your product comparisons</p><h1>Let’s look a little<br><em>closer.</em></h1><p class="lead">Before you lower your price, check the match. Compare your own product details or try an example. Free to use, with no account needed.</p></div></section>
+<main id="main"><section class="page-head"><div class="wrap"><p class="eyebrow">Your product comparisons</p><h1>Compare product details.<br><em>Before you act.</em></h1><p class="lead">Before you lower your price, check the match. Compare your own product details or try an example. Free to use, with no account needed.</p></div></section>
 <section class="section alt" style="padding-top:35px"><div class="wrap app-layout"><div><div class="app-warm-strip"><span class="round-stamp">new here?</span><h2>Want to see it in action?</h2><p>Try a sample comparison to see how the checks work.</p><button id="fill-fictional-example" type="button" class="btn">Try an example <span aria-hidden="true">↗</span></button> <button id="clear-fictional-example" type="button" class="btn ghost" hidden>Use my own details</button><p class="form-help" id="example-disclaimer">Sample product details and prices. No live prices are fetched.</p><p>Short on time or missing product details? <a href="/request/">Ask for a human-reviewed audit</a> instead of entering all the fields.</p></div><div class="first-check-note"><strong>Start with one product you know.</strong><p>Enter your listing and one other listing below. You'll need the same manufacturer ID (MPN or GTIN), brand, variant, pack, condition, prices, the other listing's URL and observation time. Missing details lead to HOLD, not a guessed match.</p><a class="route" href="#review-form">Go to my first comparison</a></div><div class="app-two-paths"><b>Prefer a CSV?</b><span>Use the advanced import below</span></div><details class="form" style="margin-top:22px" id="csv-workflow"><summary style="font-weight:800;cursor:pointer;font-size:18px">Have a CSV? Paste it here instead</summary><p class="form-help">Paste 1–500 comparison rows (up to 2 MB). This runs locally in your browser; nothing is uploaded. Use the 18-column template or try 25 sample observations.</p><label class="field" for="csv-text">CSV rows (including header)</label><textarea id="csv-text" class="csv-input" rows="7" spellcheck="false" placeholder="Paste your CSV header and rows here"></textarea><div class="form-actions"><button type="button" class="btn" id="review-csv">Review pasted CSV →</button><button type="button" class="btn ghost" id="download-csv-template">Blank CSV template</button> <button type="button" class="btn ghost" id="download-fictional-csv">25 sample CSV rows</button></div><p class="form-help">Check the original listing before acting on a match.</p></details><form id="review-form"><div id="observations"></div><div class="form-actions"><button id="add-observation" class="btn ghost" type="button">+ Add a comparison</button><button id="clear-own-entries" class="btn ghost" type="button">Clear my entries</button><button class="btn" type="submit">Check this comparison ↗</button><button id="export-results" class="btn ghost" type="button" hidden>Download JSON</button></div></form><div id="review-result" class="result" hidden role="status" aria-live="polite"></div><div class="conversion-next"><h2>Need a second pair of eyes before you act?</h2><p>If a comparison is uncertain or a campaign is approaching, request a focused human-reviewed audit. No checker data is sent automatically.</p><a class="btn ghost" href="/request/">Request a five-SKU audit</a></div></div><aside class="app-side"><div class="no-network"><strong>Your work stays on your device.</strong><p>The free checker sends no product observations to PriceBriefs. Your browser processes the form and creates any download locally.</p><p><strong>Maximum:</strong> 3 distinct products, 2 competitor observations per product, 6 rows total.</p><p><strong>Comparison checks:</strong> missing product ID, category or variant; unknown stock; stale observation; or invalid source means HOLD.</p></div><div class="card" style="margin-top:20px"><p class="tag">Before you change a price</p><ul class="list-simple"><li>We do not fetch the link you enter.</li><li>We do not confirm the retailer's live price.</li><li>We do not check currency conversion, VAT, shipping or promotions.</li><li>REVIEW is not permission to automatically reprice.</li></ul><p class="form-help">Use only product and source information you are permitted to process.</p></div></aside></div></section></main>
 <footer class="pi-footer">
   <div class="pi-shell pi-footer-top">
@@ -23,19 +25,7 @@
       <a class="pi-brand" href="/"><img class="v6-brand-mark" src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true"><span class="v6-wordmark">PriceBriefs</span></a>
       <p>Evidence before action. No fabricated findings or automatic store changes.</p>
     </div>
-    <nav aria-label="Footer">
-      <a href="/product/">Product</a>
-      <a href="/how-it-works/">How it works</a>
-      <a href="/agency/">For agencies</a>
-      <a href="/app/">Open the free comparison checker</a>
-      <a href="/sample-brief/">Sample brief</a>
-      <a href="/guides/price-mismatch/">Price mismatch guide</a>
-      <a href="/guides/price-match-checklist/">Price match checklist</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/request/">Contact</a>
-      <a href="/trust/">Trust &amp; data</a>
-      <a href="https://sarmadtawfeek.se/#contact">Contact Sam Tawfeek</a>
-    </nav>
+    <nav aria-label="Footer"><div class="pb-footer-group"><span>Product</span><a href="/product/">Product</a><a href="/how-it-works/">How it works</a><a href="/app/" aria-current="page">Free checker</a><a href="/sample-brief/">Sample brief</a></div><div class="pb-footer-group"><span>Resources</span><a href="/guides/price-mismatch/">Price mismatch guide</a><a href="/guides/price-match-checklist/">Price match checklist</a><a href="/trust/">Trust &amp; data</a></div><div class="pb-footer-group"><span>Work with us</span><a href="/agency/">For agencies</a><a href="/pricing/">Pricing</a><a href="/request/">Contact</a><a href="https://sarmadtawfeek.se/#contact">Contact Sam Tawfeek</a></div></nav>
   </div>
   <div class="pi-shell pi-footer-legal">
     <a href="/privacy/">Privacy</a>
