@@ -7,7 +7,7 @@ test('Five-SKU human audit always nonbinding and distinct from free checker',()=
   const home=page('index.html'),price=page('pricing/index.html'),request=page('request/index.html');
   for(const text of [home,price,request]){
     assert.doesNotMatch(text,/Paid audits are quoted in USD|Paid audit prices are quoted in USD|USD quote/);
-    assert.match(text,/five-SKU|five selected|five public|five product|five-page|five-SKU/i);
+    assert.match(text,/up to five relevant public product pages/i);
     assert.match(text,/https:\/\/sarmadtawfeek\.se\/#contact/);
   }
   assert.match(price,/written quote in an agreed currency/);

@@ -9,7 +9,7 @@ test('Global audit offer: USD indicative reference, no binding price, written qu
     assert.match(s,/excl\. applicable taxes/);
     assert.doesNotMatch(s,/quoted in USD|USD quote/);
     assert.match(s,/written quote in an agreed currency/);
-    assert.match(s,/five-SKU|five public|five selected/i);
+    assert.match(s,/up to five relevant public product pages/i);
     assert.match(s,/https:\/\/sarmadtawfeek\.se\/#contact/);
     assert.doesNotMatch(s,/href=['"][^'"]*checkout/);
   }

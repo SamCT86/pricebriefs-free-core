@@ -90,7 +90,7 @@ test('existing free checker retains existing fictional one-click path',()=>{
 test('price scope remains a human-reviewed written quote, not self-serve purchase',()=>{
   const h=read('index.html'),p=read('pricing/index.html'),req=read('request/index.html');
   assert.match(h,/US\$349/);
-  assert.match(h,/five-SKU/i);
+  assert.match(h,/up to five relevant public product pages/i);
   assert.match(h,/written quote in an agreed currency/);
   assert.match(p,/You decide whether to proceed after reviewing the quote/i);
   assert.match(req,/Nothing is sent until you send it/);
