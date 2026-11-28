@@ -138,3 +138,5 @@ body.pi.pb-v9.audit-request .nexus-audit-form .eyebrow{margin-bottom:20px}
 .pi :where(p, li, span, small, label, figcaption) { font-size: max(12px, 1em) !important; }
 .pi-nav a { padding-inline: 10px; }
 .pi .pi-small a, .pi .pi-fine a, .pi .v7-note a { padding-block: 12px; display: inline-flex; align-items: center; }
+.pi-nav a, .pi-footer-legal a { min-width: 44px; display: inline-flex; justify-content: center; align-items: center; }
+.pi .v7-text-link, .pi .pi-text-link { min-height: 44px; display: inline-flex; align-items: center; }
