@@ -1,0 +1,4 @@
+﻿const fs=require("fs");let c=fs.readFileSync("agency/index.html","utf8");let n=0;
+const rep=(a,b,l)=>{if(!c.includes(a)){console.log("MISS "+l);return}c=c.replace(a,b);n++;console.log("ok "+l)};
+rep("<h1>Give your client a clear next step on a complex price or feed issue.</h1>","<h1>One client issue your tools cannot explain.</h1>","ag-h1");
+rep('<p class="pi-lede">Bring one client issue your usual tools cannot explain. Get dated source evidence, a prioritized fix order and a brief your team can use.</p>','<p class="pi-lede">Bring one case your stack cannot explain. You get dated evidence, a fix order your team can run, and the client stays yours.</p><p><b>White label.</b> The brief goes to your team, not to your client.</p><p><b>Several cases a month?</b> One fixed rate per case and one contact instead of a thread.</p>',"ag-lede");fs.writeFileSync("agency/index.html",c);console.log("n="+n);
