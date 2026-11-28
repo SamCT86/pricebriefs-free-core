@@ -9,6 +9,6 @@ if(typeof document!=='undefined'){
  if(f&&out){const fmt=n=>new Intl.NumberFormat('en',{maximumFractionDigits:2}).format(n);
  const refresh=()=>{const v=['price','cost','cut','units'].map(n=>{const x=f.querySelector('[name='+n+']');return x.value.trim()===''?NaN:Number(x.value)});const r=marginImpact(...v);
  if(!r){out.textContent='Check your inputs: use a positive selling price, a reduction no larger than the price, a nonnegative cost and a whole number of units.';return}
- out.textContent='Gross profit before: '+fmt(r.before)+' | After: '+fmt(r.after)+' | Gross profit reduction: '+fmt(r.loss)+' | Units needed after cut to match prior gross profit: '+(r.breakEven===null?'No meaningful break-even volume at this margin':fmt(r.breakEven));};
+ const lines=['Gross profit before: '+fmt(r.before),'After: '+fmt(r.after),'Gross profit reduction: '+fmt(r.loss),'Units needed after cut to match prior gross profit: '+(r.breakEven===null?'No meaningful break-even volume at this margin':fmt(r.breakEven))];out.replaceChildren();for(const [i,t] of lines.entries()){if(i){const sep=document.createElement('span');sep.className='pb-margin-separator';sep.textContent=' | ';out.append(sep);}const line=document.createElement('span');line.className='pb-margin-line';line.textContent=t;out.append(line);}};
  f.querySelector('button').addEventListener('click',refresh);f.addEventListener('input',refresh);refresh();}
 }

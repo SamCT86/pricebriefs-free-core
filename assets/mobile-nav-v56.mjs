@@ -1,0 +1,2 @@
+/* Local mobile menu interaction only; no storage or network. */
+for(const menu of document.querySelectorAll('.pi-mobile-nav')){const trigger=menu.querySelector('summary');document.addEventListener('pointerdown',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false;});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){e.preventDefault();menu.open=false;trigger?.focus();}});}

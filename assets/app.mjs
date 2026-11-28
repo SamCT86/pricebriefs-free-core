@@ -5,6 +5,8 @@ import {explainCsvError} from './csv-diagnostics.mjs';
 
 const form=document.querySelector('#review-form');
 const result=document.querySelector('#review-result');
+function revealResult(){const narrow=matchMedia('(max-width:760px)').matches;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;result.scrollIntoView({block:narrow?'start':'nearest',behavior:narrow||reduced?'instant':'smooth'});}
+
 const add=document.querySelector('#add-observation');
 const clearOwnButton=document.querySelector('#clear-own-entries');
 const list=document.querySelector('#observations');
@@ -238,7 +240,7 @@ if(form&&list&&result){
       reviewSnapshot=currentSnapshot();
       exportButton.hidden=true;lastExport=null;
     }
-    result.scrollIntoView({block:'nearest',behavior:'smooth'});
+    revealResult();
   });
   templateButton?.addEventListener('click',()=>saveLocal(csvTemplate(),'pricebriefs-blank-template.csv','text/csv;charset=utf-8'));
   fictionalCsvButton?.addEventListener('click',()=>saveLocal(fictionalCsvSample25(),'pricebriefs-FICTIONAL-25-row-example.csv','text/csv;charset=utf-8'));
@@ -302,7 +304,7 @@ demoButton?.addEventListener('click',()=>{
   form.requestSubmit();
   const notice=document.querySelector('#example-disclaimer');
   if(notice)notice.textContent='Sample data loaded. Edit any field, or select “Start with a blank form”.';
-  result.scrollIntoView({behavior:'smooth',block:'nearest'});
+  revealResult();
 });
 clearDemoButton?.addEventListener('click',()=>{
   if(!form||!list)return;

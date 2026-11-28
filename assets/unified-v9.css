@@ -173,3 +173,24 @@ body.pi #draft-output textarea{white-space:pre-wrap;overflow-wrap:anywhere;resiz
 body.pi #draft-store{resize:vertical}
 body.pi :is(#request-draft,#review-result,.pricing-grid){scroll-margin-top:24px}
 @media(max-width:480px){body.pi .pb-quick-actions{align-items:stretch}body.pi .pb-quick-actions>.btn{flex:1 1 100%;justify-content:center}body.pi .pb-quick-actions>.pi-text-link{justify-content:center}body.pi .nexus-audit-form{padding:18px!important}}
+
+/* S56: narrow-screen visual containment; desktop design untouched. */
+@media(max-width:760px){
+body.pi.pb-v9 #evidence-console .pi-example{white-space:normal;overflow-wrap:anywhere;min-width:0;max-width:100%;box-sizing:border-box;line-height:1.55;align-self:stretch}
+body.pi.pb-v9 #evidence-console .pi-demo-switch{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+body.pi.pb-v9 #evidence-console .pi-demo-switch button{width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;text-align:center}
+body.pi.pb-v9 :is(#review-form,#csv-workflow) .form-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:stretch}
+body.pi.pb-v9 :is(#review-form,#csv-workflow) .form-actions>button,body.pi.pb-v9 #review-form .row-actions>button{width:100%;min-width:0;justify-content:center;text-align:center;white-space:normal;overflow-wrap:anywhere}
+body.pi.pb-v9 .pb-mobile-links{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:8px}
+body.pi.pb-v9 .pb-mobile-links>a{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body.pi.pb-v9 #margin-output .pb-margin-separator{display:none}
+body.pi.pb-v9 #margin-output .pb-margin-line{display:block;overflow-wrap:anywhere;padding-block:6px;border-bottom:1px solid var(--pb-border)}
+body.pi.pb-v9 #margin-output .pb-margin-line:last-child{border-bottom:0}
+body.pi.pb-v9 .matrix{table-layout:fixed;width:100%;font-size:13px;line-height:1.6}
+body.pi.pb-v9 .matrix :is(th,td){padding:10px 6px;overflow-wrap:anywhere;vertical-align:top}
+body.pi.pb-v9 .matrix :is(th,td):nth-child(1){width:39%}
+body.pi.pb-v9 .matrix :is(th,td):nth-child(2){width:24%;text-align:center}
+body.pi.pb-v9 .matrix :is(th,td):nth-child(3){width:37%}
+}
+
+@media(max-width:760px){body.pi.pb-v9 .pb-mobile-link-separator{display:none}}
