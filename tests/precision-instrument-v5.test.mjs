@@ -50,7 +50,7 @@ test('unknown scenario falls back to conservative fictional REVIEW',()=>{
 test('public home cannot offer a fake payment or live URL scanner',()=>{
  const h=read('index.html');
  assert.doesNotMatch(h,/href=["'][^"']*(?:checkout|stripe)|<form\b|live scan complete|guaranteed 3 findings/i);
- assert.match(h,/US\$349/);assert.match(h,/written quote in an agreed currency/);
+ assert.match(h,/US\$49/);assert.match(h,/written quote in an agreed currency/);
  assert.match(h,/id="pi-check"/);assert.match(h,/role="status" aria-live="polite"/);
 });
 test('brand home and agency guide have complete canonical destinations',()=>{

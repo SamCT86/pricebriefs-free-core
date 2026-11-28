@@ -11,8 +11,8 @@ test('Current home has eight including bounded source observation, no autoplay m
  assert.match(g,/<video\b/);
  assert.match(g,/id="margin-form"/);
 });
-test('paid service is first on pricing and free checker stays available',()=>{
- assert.ok(p.indexOf('pricing-card pricing-paid')<p.indexOf('<article class="pricing-card">'));
+test('Free entry leads to three requested paid packages',()=>{
+ for(const plan of ['starter','pro','agency'])assert(p.includes('/request/?plan='+plan));assert(p.indexOf('Product Health Check')<p.indexOf('Store Audit'));
  assert.match(p,/href="\/app\/"/);
 });
 test('existing grid remains responsive and V5 mobile layout is explicitly stacked',()=>{

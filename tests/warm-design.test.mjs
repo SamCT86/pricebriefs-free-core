@@ -17,13 +17,13 @@ test('existing eight routes retain public and local checker boundaries',()=>{
 });
 test('Precision Instrument replaces generic audit hero with honest problem-led entry',()=>{
   const s=read('index.html');
-  assert.match(s,/Check the product\.<br><em>Before you match the price\.<\/em>/);
+  assert.match(s,/Find the errors\.<br><em>Fix what matters\. Pay less\.<\/em>/);
   assert.match(s,/id="pi-product-url"/);
   assert.match(s,/Check URL format/);
   assert.match(s,/does not visit your store or inspect live prices/);
   assert.match(s,/FICTIONAL EXAMPLE/);
   assert.match(s,/Open the free comparison checker/);
-  assert.match(s,/US\$349/);
+  assert.match(s,/US\$49/);
   assert.match(s,/written quote in an agreed currency/);
   assert.doesNotMatch(s,/guaranteed savings|AI-powered real.time|three verified findings|100% accurate/i);
 });
@@ -45,7 +45,7 @@ test('free local checker and inquiry still have functional navigation',()=>{
 });
 test('agency and price mismatch entries are standalone truthful pages',()=>{
   const a=read('agency/index.html'),g=read('guides/price-mismatch/index.html');
-  assert.match(a,/client issue your tools cannot explain/i);
+  assert.match(a,/More catalog coverage\. Less audit overhead/i);
   assert.match(a,/we first agree the scope, rights, pricing and capacity/i);
   assert.match(g,/public price difference alone does not establish a Google Merchant Center rejection/i);
   assert.match(g,/Merchant Center rejection/);
@@ -89,12 +89,12 @@ test('existing free checker retains existing fictional one-click path',()=>{
 });
 test('price scope remains a human-reviewed written quote, not self-serve purchase',()=>{
   const h=read('index.html'),p=read('pricing/index.html'),req=read('request/index.html');
-  assert.match(h,/US\$349/);
-  assert.match(h,/up to five relevant public product pages/i);
+  assert.match(h,/US\$49/);
+  assert.match(h,/requested scope targets/i);
   assert.match(h,/written quote in an agreed currency/);
   assert.match(p,/You decide whether to proceed after reviewing the quote/i);
   assert.match(req,/Nothing is sent until you send it/);
   assert.doesNotMatch(h+req,/<form\b|checkout\.stripe/i);
 });
 
-test('NEXUS customer-facing copy retains local-source and receipt truth boundaries',()=>{const h=read('index.html'),a=read('agency/index.html'),t=read('thanks/index.html');assert.match(h,/Check the product\.<br><em>Before you match the price\.<\/em>/);assert.match(h,/No page was fetched/);assert.match(h,/human-reviewed (?:audit|investigation)/);assert.match(a,/we first agree the scope, rights, pricing and capacity/i);assert.match(t,/Ready to send your audit request\?/);assert.match(t,/not proof of delivery/);assert.match(t,/After we receive your request/);assert.doesNotMatch(t,/Thank you for your inquiry/);});
+test('NEXUS customer-facing copy retains local-source and receipt truth boundaries',()=>{const h=read('index.html'),a=read('agency/index.html'),t=read('thanks/index.html');assert.match(h,/Find the errors\.<br><em>Fix what matters\. Pay less\.<\/em>/);assert.match(h,/No page was fetched/);assert.match(h,/human-reviewed (?:audit|investigation)/);assert.match(a,/we first agree the scope, rights, pricing and capacity/i);assert.match(t,/Ready to send your audit request\?/);assert.match(t,/not proof of delivery/);assert.match(t,/After we receive your request/);assert.doesNotMatch(t,/Thank you for your inquiry/);});

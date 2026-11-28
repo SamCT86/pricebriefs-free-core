@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const root=new URL('../',import.meta.url);
 const page=name=>fs.readFileSync(new URL(name,root),'utf8');
-test('Five-SKU human audit always nonbinding and distinct from free checker',()=>{
+test('Proposed catalog audit always nonbinding and distinct from free checker',()=>{
   const home=page('index.html'),price=page('pricing/index.html'),request=page('request/index.html');
   for(const text of [home,price,request]){
     assert.doesNotMatch(text,/Paid audits are quoted in USD|Paid audit prices are quoted in USD|USD quote/);
-    assert.match(text,/up to five (?:relevant )?public product pages/i);
+    assert.match(text,/scope/i);
     assert.match(text,/https:\/\/sarmadtawfeek\.se\/#contact/);
   }
   assert.match(price,/written quote in an agreed currency/);

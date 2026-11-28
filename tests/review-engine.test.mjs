@@ -21,8 +21,8 @@ test('non-numeric price fail closed',()=>{const x=valid();x.peerPrice='abc';asse
 test('invalid currency fail closed',()=>{const x=valid();x.currency='BTC';assert.equal(evaluate(x,now).status,'HOLD')});
 test('source URL is syntax-only, never automatically verified',()=>{assert.equal(sourceLooksPublicHttps(valid().sourceUrl),true);assert.equal(evaluate(valid(),now).sourceVerified,false)});
 for(const u of ['http://retailer.se/p','https://localhost/p','https://127.0.0.1/p','https://192.168.1.2/p','https://example.com/p','file:///secret','javascript:alert(1)','https://admin:pass@retailer.se/p','https://shop.local/p','https://retailer.se:8000/p'])test('reject unsafe source '+u,()=>assert.equal(sourceLooksPublicHttps(u),false));
-test('limit 500 total rows',()=>assert.equal(evaluateBatch(Array.from({length:501},valid),now).status,'HOLD'));
-test('limit 500 distinct products',()=>{const a=Array.from({length:501},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+i;return x});assert.equal(evaluateBatch(a,now).status,'HOLD')});
+test('limit 1000 total rows',()=>assert.equal(evaluateBatch(Array.from({length:1001},valid),now).status,'HOLD'));
+test('limit 1000 distinct products',()=>{const a=Array.from({length:1001},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+i;return x});assert.equal(evaluateBatch(a,now).status,'HOLD')});
 test('limit 2 competitor observations each',()=>assert.equal(evaluateBatch([valid(),valid(),valid()],now).status,'HOLD'));
 test('valid max 3 products ×2 peers accepted',()=>{const a=Array.from({length:6},(_,i)=>{const x=valid();x.merchantSku=x.peerSku='X-'+Math.floor(i/2);return x});const r=evaluateBatch(a,now);assert.equal(r.status,'OK');assert.equal(r.results.length,6)});
 test('empty batch denied',()=>assert.equal(evaluateBatch([],now).status,'HOLD'));

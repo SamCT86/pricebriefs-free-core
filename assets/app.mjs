@@ -234,7 +234,7 @@ if(form&&list&&result){
     try{showReview(parsePriceBriefsCsv(csvText?.value??''));}
     catch(e){
       result.hidden=false;result.classList.add('hold');
-      result.innerHTML='<h3>Fix the CSV and try again</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Use the 18-column template, then paste 1–500 complete rows. Your data stays in your browser.</p>';
+      result.innerHTML='<h3>Fix the CSV and try again</h3><p>'+esc(explainCsvError(e,csvText?.value??''))+'</p><p>Use the 18-column template, then paste 1–1,000 complete rows. Your data stays in your browser.</p>';
       // Preserve the input snapshot for a failed parse, too. A delayed blur
       // with unchanged input cannot erase the diagnostic; edits still can.
       reviewSnapshot=currentSnapshot();

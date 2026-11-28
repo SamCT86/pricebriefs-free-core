@@ -12,7 +12,7 @@ test('quoted comma is parsed without code execution',()=>{const d=row();d[4]='"C
 test('CRLF and BOM accepted',()=>{const p=parsePriceBriefsCsv('\ufeff'+COLUMNS.join(',')+'\r\n'+row().join(',')+'\r\n');assert.equal(p.length,1)});
 test('unknown field denied',()=>assert.throws(()=>parsePriceBriefsCsv('dangerous,'+csvTemplate()+row().join(','))));
 test('duplicate header denied',()=>{const h=[...COLUMNS];h[1]=h[0];assert.throws(()=>parsePriceBriefsCsv(h.join(',')+'\n'+row().join(',')))});
-test('too many rows denied',()=>assert.throws(()=>parsePriceBriefsCsv(csvTemplate()+Array.from({length:501},()=>row().join(',')).join('\n'))));
+test('too many rows denied',()=>assert.throws(()=>parsePriceBriefsCsv(csvTemplate()+Array.from({length:1001},()=>row().join(',')).join('\n'))));
 test('unclosed quoted field denied',()=>assert.throws(()=>parsePriceBriefsCsv(csvTemplate()+row().join(',')+',\"notclosed')));
 test('missing cell denied',()=>assert.throws(()=>parsePriceBriefsCsv(csvTemplate()+row().slice(0,-1).join(','))));
 test('oversized pasted payload denied',()=>assert.throws(()=>parsePriceBriefsCsv('a'.repeat(2_100_000))));
