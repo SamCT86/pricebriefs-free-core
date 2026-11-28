@@ -14,6 +14,16 @@ const csvText=document.querySelector('#csv-text');
 const templateButton=document.querySelector('#download-csv-template');
 const fictionalCsvButton=document.querySelector('#download-fictional-csv');
 const MANUAL_OBSERVATIONS_MAX=6;
+const MANUAL_PRODUCTS_MAX=3;
+/* Same identity tuple the engine groups on, so the manual cap matches the copy (3 products × 2 rows). */
+const productKey=r=>JSON.stringify(['merchantBrand','merchantSku','merchantType','merchantVariant','merchantPack','merchantCondition']
+ .map(k=>String(r?.[k]??'').trim().toUpperCase()));
+function manualScopeOverflow(rows){
+ const distinct=new Set(rows.map(productKey)).size;
+ if(distinct<=MANUAL_PRODUCTS_MAX)return null;
+ return 'Manual comparisons cover '+MANUAL_PRODUCTS_MAX+' products with 2 competitor observations each (6 rows). Remove '+
+  (distinct-MANUAL_PRODUCTS_MAX)+' comparison(s) or review the whole set as CSV.';
+}
 let lastExport=null;
 let reviewMode='manual'; // manual | csv | demo
 let reviewSnapshot=null;
@@ -56,7 +66,7 @@ const textInput=name=>{
 const condition=name=>'<label class="field">'+(name==='merchantCondition'?'Your':'Other listing')+' condition<select name="'+name+'"><option value="unknown">Unknown — HOLD</option><option value="new">New</option><option value="refurbished">Refurbished</option><option value="used">Used</option></select></label>';
 const otherField=name=>name==='merchantCondition'||name==='peerCondition'?condition(name):
  name==='stock'?'<label class="field">Stock on the other listing<select name="stock"><option value="unknown">Unknown — HOLD</option><option value="in_stock">In stock (you checked)</option><option value="out_of_stock">Out of stock</option></select></label>':
- name==='currency'?'<label class="field">Currency (same for both prices)<select name="currency"><option value="" selected disabled>Choose currency</option><option>USD</option><option>EUR</option><option>GBP</option><option>SEK</option></select></label>':
+ name==='currency'?'<label class="field">Currency (same for both prices)<select name="currency" required><option value="" selected disabled>Choose currency</option><option>USD</option><option>EUR</option><option>GBP</option><option>SEK</option></select></label>':
  textInput(name);
 const group=(heading,hint,keys)=>
  '<section class="review-group" aria-label="'+esc(heading)+'"><h4>'+esc(heading)+'</h4><p class="review-hint">'+esc(hint)+'</p><div class="form-grid">'+keys.map(otherField).join('')+'</div></section>';
@@ -70,13 +80,21 @@ const rowMarkup=i=>'<fieldset class="form"><legend><strong>Comparison '+i+'</str
  '<div class="row-actions"><button type="button" class="btn ghost" data-remove-comparison>Remove this comparison</button></div></fieldset>';
 
 function showReview(rows){
+  const manual=reviewMode!=='csv';
   const out=evaluateBatch(rows);
   result.hidden=false;
   hasReview=true;
   reviewSnapshot=currentSnapshot();
   result.classList.toggle('hold',out.status!=='OK'||out.results.some(r=>r.status==='HOLD'));
+  const scopeHold=manual?manualScopeOverflow(rows):null;
+  if(scopeHold){
+    result.classList.add('hold');
+    result.innerHTML='<h3>HOLD — manual limit reached</h3><p>'+esc(scopeHold)+'</p>';
+    exportButton.hidden=true;lastExport=null;return;
+  }
   if(out.status!=='OK'){
-    result.innerHTML='<h3>HOLD — comparison limit reached</h3><p>'+esc(out.reason)+'</p>';
+    const scope=manual?'Manual scope: max 3 products with 2 competitor observations each (6 rows).':out.reason;
+    result.innerHTML='<h3>HOLD — comparison limit reached</h3><p>'+esc(scope)+'</p>';
     exportButton.hidden=true;lastExport=null;return;
   }
   const valid=out.results.filter(r=>r.status==='REVIEW').length;
@@ -107,18 +125,39 @@ function saveLocal(text,name,type){
   const blob=new Blob([text],{type});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=name;
-  a.click();URL.revokeObjectURL(url);
+  document.body.append(a);a.click();a.remove();
+  // Revoking in the same tick can cancel the download in non-Chromium engines.
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 if(form&&list&&result){
   list.innerHTML=rowMarkup(1);
-  const clearOwn=()=>{
+  const demoNotice=document.querySelector('#example-disclaimer');
+  const LEGEND_SUFFIX=' · enter the details you collected';
+  /* Leaving the sample must also leave the FICTIONAL_DEMO export label, or edited
+     values keep downloading as invented sample data. */
+  const leaveDemo=()=>{
+    if(reviewMode!=='demo')return;
+    reviewMode='manual';
+    add.disabled=false;
+    const clearDemo=document.querySelector('#clear-fictional-example');
+    if(clearDemo)clearDemo.hidden=true;
+    const legend=list.querySelector('legend');
+    if(legend)legend.textContent='Comparison 1'+LEGEND_SUFFIX;
+    if(demoNotice)demoNotice.textContent='Editing turns these sample values into your own entries.';
+  };
+  const resetForm=()=>{
     invalidateCurrentReview();
     list.innerHTML=rowMarkup(1);
     add.disabled=false;
-    if(csvText)csvText.value='';
     reviewMode='manual';
     const clearDemo=document.querySelector('#clear-fictional-example');
     if(clearDemo)clearDemo.hidden=true;
+    // No stale "check again" box hovering above a now-empty form.
+    result.hidden=true;
+  };
+  const clearOwn=()=>{
+    resetForm();
+    if(csvText)csvText.value='';
   };
   clearOwnButton?.addEventListener('click',()=>{
     const populated=readFormRows().some(row=>Object.entries(row).some(([k,v])=>
@@ -129,22 +168,25 @@ if(form&&list&&result){
   });
   list.addEventListener('click',e=>{
     const button=e.target.closest('[data-remove-comparison]');
-    if(!button||reviewMode==='demo')return;
+    if(!button)return;
     const outer=button.closest('fieldset.form');
     if(!outer)return;
     invalidateCurrentReview();
+    if(reviewMode==='demo')leaveDemo();
     if(list.querySelectorAll('fieldset').length===1)list.innerHTML=rowMarkup(1);
     else outer.remove();
     add.disabled=false;
     [...list.querySelectorAll('fieldset')].forEach((fs,i)=>{
       const legend=fs.querySelector('legend');
-      if(legend)legend.textContent='Comparison '+(i+1)+' · your entries';
+      if(legend)legend.textContent='Comparison '+(i+1)+LEGEND_SUFFIX;
     });
+    add.focus(); // the clicked button is gone; keep the keyboard position predictable
   });
   // A blur/change event can arrive after a CSV Review click; do not invalidate a result
   // whose exact source snapshot was just reviewed. Real edits still fail closed.
   const onChange=e=>{
     const changedCsv=e?.target===csvText;
+    if(reviewMode==='demo')leaveDemo();
     // CSV and form are independent acquisition paths. A late form blur/change
     // after clicking "Review CSV" must not invalidate already reviewed CSV rows.
     // Only an edit to the currently reviewed source can stale its result.
@@ -170,6 +212,8 @@ if(form&&list&&result){
     if(n>=MANUAL_OBSERVATIONS_MAX){add.disabled=true;return;}
     list.insertAdjacentHTML('beforeend',rowMarkup(n+1));
     if(n+1>=MANUAL_OBSERVATIONS_MAX)add.disabled=true;
+    const fresh=[...list.querySelectorAll('fieldset')].pop();
+    fresh?.querySelector('input,select')?.focus();
   });
   form.addEventListener('submit',e=>{
     e.preventDefault();
@@ -257,7 +301,7 @@ demoButton?.addEventListener('click',()=>{
   }
   form.requestSubmit();
   const notice=document.querySelector('#example-disclaimer');
-  if(notice)notice.textContent='Sample data loaded. Select “Use my own details” to start your comparison.';
+  if(notice)notice.textContent='Sample data loaded. Edit any field, or select “Start with a blank form”.';
   result.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 clearDemoButton?.addEventListener('click',()=>{
@@ -267,6 +311,7 @@ clearDemoButton?.addEventListener('click',()=>{
   reviewMode='manual';
   add.disabled=false;
   clearDemoButton.hidden=true;
+  result.hidden=true;
   const notice=document.querySelector('#example-disclaimer');
   if(notice)notice.textContent='Ready for your product details.';
 });
