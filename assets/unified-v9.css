@@ -127,3 +127,9 @@ body.pi.pb-v9.audit-request .nexus-audit-form .eyebrow{margin-bottom:20px}
 
 /* 8 · Sista små träffytorna */
 .pi p a, .pi li a, .pi .pi-small a { padding-block: 6px; display: inline-block; }
+
+/* 9 · Golvet gäller all löptext, inte bara namngivna etiketter */
+.pi :where(p, li, span, small, label, figcaption, em:not(h1 em):not(h2 em), .form-help) {
+  font-size: max(12px, 1em);
+  line-height: 1.5;
+}
