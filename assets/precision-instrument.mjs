@@ -32,6 +32,7 @@ function resetStatus(){
   if(input)input.removeAttribute('aria-invalid');
 }
 async function discoverSourceCapability(url,token){
+  if(!PUBLIC_SOURCE_ENABLED)return;
   // A same-origin capability GET never includes product input or external source fetches.
   try{
     const response=await fetch('/api/precheck',{method:'GET',mode:'same-origin',credentials:'omit',
@@ -97,6 +98,7 @@ function showIncident(incident){
     'Automatic recheck is unavailable until source and signing permissions are configured.');
 }
 async function readApprovedSource(){
+  if(!PUBLIC_SOURCE_ENABLED)return;
   if(!lastUrl||!runSource||!status||!sourcePanel)return;
   const token=revision,url=lastUrl;clearIncident();runSource.disabled=true;
   write('#pi-source-summary','Requesting one approved public page. No merchant account access.');
@@ -144,7 +146,7 @@ async function readApprovedSource(){
     if(runSource&&token===revision&&url===lastUrl)runSource.disabled=false;
   }
 }
-if(runSource)runSource.addEventListener('click',()=>{void readApprovedSource();});
+if(PUBLIC_SOURCE_ENABLED&&runSource)runSource.addEventListener('click',()=>{void readApprovedSource();});
 function downloadFile(content,filename,mime){
   if(typeof content!=='string'||content.length>50000)return;
   const blob=new Blob([content],{type:mime});
@@ -167,6 +169,7 @@ if(downloadReceipt)downloadReceipt.addEventListener('click',()=>{
   },null,2), 'PriceBriefs-'+activePack.caseId+'-Source-Receipt.json','application/json;charset=utf-8');
 });
 async function performRecheck(){
+  if(!PUBLIC_SOURCE_ENABLED)return;
   if(!activeReceipt||!recheckButton||!activePack)return;
   const token=revision,receipt=activeReceipt;
   recheckButton.disabled=true;
@@ -201,7 +204,7 @@ async function performRecheck(){
     if(recheckButton&&token===revision)recheckButton.disabled=success;
   }
 }
-if(recheckButton)recheckButton.addEventListener('click',()=>{void performRecheck();});
+if(PUBLIC_SOURCE_ENABLED&&recheckButton)recheckButton.addEventListener('click',()=>{void performRecheck();});
 
 const demo=el('.pi-demo-switch'),card=el('[data-pi-card="primary"]');
 const label=el('#pi-evidence-state'),title=el('#pi-evidence-title');

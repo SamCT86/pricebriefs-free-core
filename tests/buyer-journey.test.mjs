@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const r=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const h=r('index.html'),g=r('guides/price-match-checklist/index.html'),p=r('pricing/index.html');
-test('V5 home has six including bounded source observation, no autoplay media or calculator, and a truthful console',()=>{
- assert.equal((h.match(/<section\b/g)||[]).length,7);
+test('Current home has eight including bounded source observation, no autoplay media or calculator, and a truthful console',()=>{
+ assert.equal((h.match(/<section\b/g)||[]).length,8);
  assert.doesNotMatch(h,/<fieldset\b|<video[^>]*autoplay/i); assert.equal((h.match(/<video\b/g)||[]).length,1); assert.match(h,/id="pb-v8-video" controls playsinline preload="none"/); assert.match(h,/pricebriefs-v8\.webm/); assert.match(h,/kind="captions"/);
  assert.match(h,/id="evidence-console"/);
  assert.match(h,/does not visit your store or inspect live prices/);

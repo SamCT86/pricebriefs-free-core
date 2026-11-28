@@ -16,7 +16,7 @@ test('CSP protects scripts, connection, objects, framing and base form without e
  const csp=headers.match(/Content-Security-Policy:\s*(.+)$/m)?.[1];
  assert.ok(csp);
  for(const v of ["default-src 'self'","script-src 'self'","connect-src 'none'",
-  "object-src 'none'","base-uri 'self'","form-action 'self'","frame-ancestors 'none'"]){
+  "object-src 'none'","base-uri 'self'","form-action 'none'","frame-ancestors 'none'"]){
   assert.ok(csp.includes(v),v);
  }
  assert.doesNotMatch(csp,/script-src[^;]*'unsafe-inline'|script-src[^;]*'unsafe-eval'/);

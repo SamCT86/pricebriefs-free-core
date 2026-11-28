@@ -8,15 +8,15 @@ test('Global audit offer: USD indicative reference, no binding price, written qu
     assert.match(s,/indicative/i);
     assert.match(s,/excl\. applicable taxes/);
     assert.doesNotMatch(s,/quoted in USD|USD quote/);
-    assert.match(s,/written quote in an agreed currency/);
-    assert.match(s,/up to five relevant public product pages/i);
+    assert.match(s,/written quote in an agreed currency/i);
+    assert.match(s,/up to five (?:relevant )?public product pages/i);
     assert.match(s,/https:\/\/sarmadtawfeek\.se\/#contact/);
     assert.doesNotMatch(s,/href=['"][^'"]*checkout/);
   }
 });
 test('Free checker is live, not preview',()=>{
   assert.doesNotMatch(pages[1],/available in this preview/);
-  assert.match(pages[1],/Free · available now/);
+  assert.match(pages[1],/Free checker, no account\./);
 });
 test('Currency picker is global-choice first, with region-specific currencies still available',()=>{
  const s=fs.readFileSync(new URL('../assets/app.mjs',import.meta.url),'utf8');

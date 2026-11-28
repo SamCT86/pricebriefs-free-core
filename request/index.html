@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/assets/precision-global-v5.css?v=20261127-s26">
 <link rel="stylesheet" href="/assets/creative-v6.css?v=1">
 <link rel="stylesheet" href="/assets/human-v7.css?v=1">
-<link rel="stylesheet" href="/assets/unified-v9.css?v=20261127-v9">
+<link rel="stylesheet" href="/assets/unified-v9.css?v=20261128-static">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head><body class="audit-request pi v5-compat pb-v9"><noscript><div class="noscript-note"><p>PriceBriefs uses JavaScript for its free, browser-local comparison checker. You can still learn <a href="/how-it-works/">how it works</a> and <a href="/product/">what it does</a> without JavaScript.</p></div></noscript><a class="skip" href="#main">Skip to content</a><header class="pi-header"><div class="pi-shell pi-topline">
 <a class="pi-brand" href="/" aria-label="PriceBriefs home"><img class="v6-brand-mark" src="/favicon.svg" width="36" height="36" alt="" aria-hidden="true"><span class="v6-wordmark">PriceBriefs</span></a>
@@ -15,8 +15,37 @@
 <p class="eyebrow">Tell us what needs fixing</p>
 <h1>Tell us the decision, not the story.</h1>
 <p class="lead">Four answers and we can quote: the decision, the pages, the date the prices were seen and your deadline. Written quote in an agreed currency within one working day.</p>
-<p class="nexus-form-note"><strong>Indicative price: US$349 excl. applicable taxes.</strong> Final scope, price and applicable taxes are confirmed in a written quote. No obligation.</p>
+<p class="nexus-form-note"><strong>Indicative price: US$349 excl. applicable taxes.</strong> Final scope, price and applicable taxes are confirmed in a written quote. No obligation.</p><div class="pb-quick-actions"><a class="btn" href="#request-draft">Prepare email request</a><a class="pi-text-link" href="mailto:hello@pricebriefs.com?subject=PriceBriefs%20audit%20request">Email PriceBriefs</a></div>
 </div></section>
+
+<section class="pricing-faq pb-request-fields" id="request-draft"><div class="wrap">
+<p class="eyebrow">Your request</p>
+<h2 class="section-title">Four fields, one written quote.</h2>
+<p class="section-lead">The page prepares your email locally. Nothing is sent until you send it in your own email app.</p><p class="form-help">All four answers are needed. If the date is unknown or there is no deadline, say so.</p>
+<div class="nexus-audit-form">
+<label for="draft-issue">1. The decision you need to make<textarea id="draft-issue" rows="4" maxlength="800" required placeholder="e.g. Decide whether to change the feed price or the product page before the campaign"></textarea></label>
+<label for="draft-store">2. Storefront and up to five public product pages<textarea id="draft-store" rows="4" maxlength="3500" required placeholder="Store URL, market, and the pages involved"></textarea></label>
+<label for="draft-date">3. The date you saw these prices<input id="draft-date" maxlength="60" required placeholder="e.g. 21 November 2026, or Unknown"></label>
+<label for="draft-deadline">4. Your deadline<input id="draft-deadline" maxlength="60" required placeholder="e.g. Monday, or No deadline"></label>
+<details class="quote-optional">
+<summary>Extra context (optional)</summary>
+<label for="draft-links">Notes your team already has<textarea id="draft-links" rows="3" maxlength="1000"></textarea></label>
+</details>
+<div id="draft-controls" hidden>
+<button type="button" class="btn" id="prepare-draft">Prepare email request</button>
+<p id="draft-status" role="status" aria-live="polite"></p>
+<div id="draft-output" hidden>
+<label for="draft-text">Your draft request<textarea readonly id="draft-text" rows="6"></textarea></label>
+<div class="hero-ctas">
+<a class="btn" id="draft-mail" href="mailto:hello@pricebriefs.com">Open in your email app</a>
+<button type="button" class="btn ghost" id="copy-draft">Copy text instead</button>
+</div>
+<p class="nexus-form-note">If your email app does not open, copy this text into an email to hello@pricebriefs.com. This page never sends a message.</p>
+</div>
+</div>
+<p class="nexus-form-note">Share only public product links; do not include confidential or customer information. <a class="pi-text-link" href="/trust/">Data &amp; trust</a> <a class="pi-text-link" href="/privacy/">Privacy</a> <a class="pi-text-link" href="/terms/">Terms of service</a></p>
+<p class="nexus-form-note">Only need the comparison first? <a class="pi-text-link" href="/app/">Open the free checker</a>.</p>
+</div></div></section>
 <section class="pricing-faq"><div class="wrap">
 <p class="eyebrow">What happens next</p>
 <h2 class="section-title">Three steps to a written quote.</h2>
@@ -26,34 +55,6 @@
 <p><a class="pi-text-link" href="/sample-brief/#audit-example">See a sample audit</a></p>
 <p>Prefer email? <a class="pi-text-link" href="mailto:hello@pricebriefs.com">hello@pricebriefs.com</a></p>
 </div></section>
-<section class="pricing-faq" id="request-draft"><div class="wrap">
-<p class="eyebrow">Your request</p>
-<h2 class="section-title">Four fields, one written quote.</h2>
-<p class="section-lead">The page prepares your email locally. Nothing is sent until you send it in your own email app.</p>
-<div class="nexus-audit-form">
-<label for="draft-issue">1. The decision you need to make<textarea id="draft-issue" rows="4" maxlength="800" placeholder="e.g. Decide whether to change the feed price or the product page before the campaign"></textarea></label>
-<label for="draft-store">2. Storefront and up to five public product pages<input id="draft-store" maxlength="250" placeholder="Store URL, market, and the pages involved"></label>
-<label for="draft-date">3. The date you saw these prices<input id="draft-date" maxlength="60" placeholder="e.g. 21 November 2026"></label>
-<label for="draft-deadline">4. Your deadline<input id="draft-deadline" maxlength="60" placeholder="e.g. before the campaign starts on Monday"></label>
-<details class="quote-optional">
-<summary>Extra context (optional)</summary>
-<label for="draft-links">Notes your team already has<textarea id="draft-links" rows="3" maxlength="500"></textarea></label>
-</details>
-<div id="draft-controls" hidden>
-<button type="button" class="btn" id="prepare-draft">Prepare email request</button>
-<p id="draft-status" role="status" aria-live="polite"></p>
-<div id="draft-output" hidden>
-<label for="draft-text">Your draft request<textarea readonly id="draft-text" rows="6"></textarea></label>
-<div class="hero-ctas">
-<a class="btn" id="draft-mail" href="mailto:hello@pricebriefs.com">Open in your email app</a>
-<a class="pi-text-link" id="copy-draft" href="#request-draft">Copy text instead</a>
-</div>
-<p class="nexus-form-note">If your email app does not open, copy this text into an email to hello@pricebriefs.com. This page never sends a message.</p>
-</div>
-</div>
-<p class="nexus-form-note">Share only public product links; do not include confidential or customer information. <a class="pi-text-link" href="/trust/">Data &amp; trust</a> <a class="pi-text-link" href="/privacy/">Privacy</a> <a class="pi-text-link" href="/terms/">Terms of service</a></p>
-<p class="nexus-form-note">Only need the comparison first? <a class="pi-text-link" href="/app/">Open the free checker</a>.</p>
-</div></div></section>
 </main>
 <footer class="pi-footer">
   <div class="pi-shell pi-footer-top">
@@ -67,4 +68,4 @@
     <a href="/privacy/">Privacy</a>
     <a href="/terms/">Terms</a>
   </div>
-</footer><script type="module" src="/assets/request-draft.mjs?v=20261126-email"></script><script type="module" src="/assets/measure.mjs"></script></body></html>
+</footer><script type="module" src="/assets/request-draft.mjs?v=20261128-static"></script></body></html>

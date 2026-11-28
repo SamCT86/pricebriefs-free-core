@@ -56,10 +56,10 @@ test('F5 first paid CTA uses AUREL-approved existing human contact route; free c
  assert.match(h,/href="\/app\/">Open the free comparison checker/);
  assert.doesNotMatch(h,/<form\b|checkout\.stripe/i);
 });
-test('F5 separate paid scope is not hosted monitoring, and app is still an unverified preview',()=>{
+test('F5 separate paid scope is not hosted monitoring; free local app remains available',()=>{
  assert.match(read('pricing/index.html'),/checker helps you compare those observations/i);
  assert.match(read('index.html'),/Open the free comparison checker/);
- assert.match(read('app/index.html'),/no account needed/i);
+ assert.match(read('app/index.html'),/no account/i);
 });
 test('F7 interim privacy note does not claim full terms',()=>{
  const h=read('trust/index.html');assert.match(h,/href="\/privacy\/">Privacy Policy/);

@@ -155,3 +155,21 @@ body.pi.pb-v9.audit-request .nexus-audit-form .eyebrow{margin-bottom:20px}
 .pi .pi-example, .pi .pi-console-kicker { max-width: 100%; overflow-wrap: anywhere; }
 /* Herons skalade bild sticker ut 4 px i 360: klipp vågrätt i stället för att tvinga om skalningen */
 .pi .pi-hero { overflow-x: clip; }
+
+/* Static-safety UI repair; preserve original visual identity. */
+body.pi [hidden]{display:none!important}
+body.pi .pb-quick-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:20px 0 12px}
+body.pi .pb-quick-actions>a,body.pi .pb-quick-actions>button{min-height:44px;max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
+body.pi .pb-quick-scope{max-width:68ch;text-align:left;margin:8px 0 18px}
+body.pi:is(.pricing-page,.audit-request,.pb-app-page) main>section+section{margin-top:0}
+body.pi.pb-v9:is(.pricing-page,.audit-request,.pb-app-page) .page-head{padding-block:clamp(28px,4vw,56px)!important}
+body.pi .pb-request-fields{padding-top:clamp(22px,3vw,40px)!important}
+body.pi .nexus-audit-form{max-width:780px;margin-inline:0;min-width:0}
+body.pi :is(.pricing-grid,.app-layout,.form-grid,.hero-ctas,.form-actions,.pi-field-row,.pb-related-actions)>*{min-width:0}
+body.pi :is(.nexus-audit-form,.pricing-card,.result,.form,.pi-console,.first-check-note,.no-network,.pb-related){overflow-wrap:anywhere}
+body.pi :is(input,textarea,select){max-width:100%;min-width:0;box-sizing:border-box}
+body.pi :is(.nexus-audit-form,.form-actions,.hero-ctas) :is(.btn,button){white-space:normal;max-width:100%;overflow-wrap:anywhere}
+body.pi #draft-output textarea{white-space:pre-wrap;overflow-wrap:anywhere;resize:vertical}
+body.pi #draft-store{resize:vertical}
+body.pi :is(#request-draft,#review-result,.pricing-grid){scroll-margin-top:24px}
+@media(max-width:480px){body.pi .pb-quick-actions{align-items:stretch}body.pi .pb-quick-actions>.btn{flex:1 1 100%;justify-content:center}body.pi .pb-quick-actions>.pi-text-link{justify-content:center}body.pi .nexus-audit-form{padding:18px!important}}
