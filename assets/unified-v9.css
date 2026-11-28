@@ -85,3 +85,45 @@ body.pi.pb-v9.audit-request .nexus-audit-form .eyebrow{margin-bottom:20px}
 .v7-text-link, .pi-text-link, .v7-note + .v7-text-link { padding-block: 5px; }
 .pi-nav a { padding-inline: 6px; }
 .pi .v7-hero-copy .v7-text-link, .pi .v7-note + .v7-text-link { padding-block: 10px; }
+
+/* ---------------------------------------------------------------
+   Elite pass 2026-11-28: typografisk golv, mätsatta rader, rytm,
+   fokus, siffror, motion. Additivt lager — inga befintliga regler rörs.
+   --------------------------------------------------------------- */
+
+/* 1 · Typografiskt golv: ingen text under 12 px, läsbar radhöjd */
+.pi small, .pi .pi-small, .pi .pi-fine, .pi .v7-note, .pi .v7-note-fine,
+.pi .pi-eyebrow, .pi .pi-console-kicker, .pi .v7-kicker, .pi .pi-incident-label,
+.pi .v7-note-label, .pi .pi-status-copy, .pi .v7-lede small {
+  font-size: max(12px, 0.75rem);
+  line-height: 1.5;
+}
+
+/* 2 · Mätt: långa stycken kapas vid läsbar radlängd */
+.pi p, .pi li { max-width: 68ch; }
+.pi .v7-hero-copy > p, .pi .pi-hero-copy > p { max-width: 46ch; }
+
+/* 3 · Rytm: staplade sektioner får luft ur samma skala */
+.pi section + section, .pi .pi-section + .pi-section { margin-top: clamp(24px, 4vw, 64px); }
+
+/* 4 · Rubrikbalans och radbrytning */
+.pi h1, .pi h2, .pi h3 { text-wrap: balance; }
+.pi p { text-wrap: pretty; }
+
+/* 5 · Siffror i jämn bredd där de jämförs */
+.pi .pi-console, .pi table, .pi .v6-workbench, .pi .plan-price, .pi .money-note { font-variant-numeric: tabular-nums; }
+
+/* 6 · Synligt tangentbordsfokus */
+.pi a:focus-visible, .pi button:focus-visible, .pi summary:focus-visible, .pi input:focus-visible, .pi textarea:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 7 · Rörelse respekteras */
+@media (prefers-reduced-motion: reduce) {
+  .pi *, .pi *::before, .pi *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* 8 · Sista små träffytorna */
+.pi p a, .pi li a, .pi .pi-small a { padding-block: 6px; display: inline-block; }
