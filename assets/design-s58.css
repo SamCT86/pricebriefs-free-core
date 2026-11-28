@@ -1,0 +1,83 @@
+/* S58: shared layout rhythm, balanced offer grid and accessible actions. */
+body.pi.pb-v9{--pb-shell:1240px;--pb-gutter:48px;--pb-section-y:64px;--pb-gap:24px}
+@media(max-width:1100px){body.pi.pb-v9{--pb-gutter:32px;--pb-section-y:52px}}
+@media(max-width:760px){body.pi.pb-v9{--pb-gutter:20px;--pb-section-y:36px;--pb-gap:16px}}
+@media(max-width:360px){body.pi.pb-v9{--pb-gutter:15px;--pb-section-y:32px}}
+body.pi.pb-v9 .pi-header .pi-shell,body.pi.pb-v9 .pi-footer .pi-shell,
+body.pi.pb-v9:not(.v7-home) main>section>:is(.wrap,.pi-shell),
+body.pi.pb-v9:not(.v7-home) .pb-related-section>.pi-shell{
+ width:min(var(--pb-shell),calc(100% - 2 * var(--pb-gutter)))!important;max-width:var(--pb-shell)!important;margin-inline:auto!important
+}
+body.pi.pb-v9:not(.v7-home) main>section+section{margin-top:0!important}
+body.pi.pb-v9:not(.v7-home) main>section:is(.section,.pi-section,.pricing-faq,.pricing-options):not(.page-head){padding-block:var(--pb-section-y)!important}
+body.pi.pb-v9:not(.v7-home) main>section:is(.page-head,.pi-inner-hero){padding-block:clamp(36px,4vw,60px)!important}
+body.pi.pb-v9:not(.v7-home) main>section>:is(.wrap,.pi-shell)>.section-lead{margin-bottom:24px}
+body.pi.pb-v9:not(.v7-home) main>section>:is(.wrap,.pi-shell)>.section-lead:last-child{margin-bottom:0}
+body.pi.pb-v9:not(.v7-home) :is(.eyebrow,.pi-eyebrow){text-transform:uppercase;letter-spacing:.11em!important;font-size:12px!important;font-weight:700!important;line-height:1.55}
+body.pi.pb-v9:not(.v7-home) :is(.pi-inner-grid,.pricing-grid,.grid3,.grid2){gap:var(--pb-gap)}
+body.pi.pb-v9:not(.v7-home) :is(.page-head,.pi-inner-hero) h1{max-width:24ch;margin-bottom:18px!important}
+body.pi.pb-v9:not(.v7-home) :is(.page-head,.pi-inner-hero) :is(.lead,.pi-lede){max-width:68ch}
+body.pi.pb-v9 .pi-inner-cta,body.pi.pb-v9 .pb-quick-actions{gap:12px 16px}
+body.pi.pb-v9 .pi-inner-cta>a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+body.pi.pb-v9 .pi-footer .pb-footer-group a{font-size:14px}
+body.pi.pb-v9 .pi-footer .pb-footer-group>span{font-size:12px}
+body.pi.pb-v9 .pi-footer nav{gap:var(--pb-gap)}
+body.pi.pb-v9 :is(button,input,select,textarea):focus-visible{scroll-margin:20px}
+body.pi.pb-v9 .pb-hero-last{display:block}
+body.pi.pb-v9.v7-home .pi-hero h1{font-size:clamp(42px,4.7vw,68px);line-height:1.05;text-wrap:initial}
+body.pi.pb-v9.v7-home .v7-evidence-note{transform:none}
+body.pi.pb-v9 .v7-actions>.v7-text-link{justify-content:center;text-decoration-thickness:1px}
+body.pi.pb-v9.pricing-page .pricing-intro .wrap>.pi-small{max-width:72ch;font-size:14px;line-height:1.65}
+body.pi.pb-v9.pricing-page .wow-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch;margin:28px 0}
+body.pi.pb-v9.pricing-page .wow-card{padding:24px!important;border-radius:16px!important;display:flex;flex-direction:column;min-width:0;gap:0;overflow-wrap:normal;word-break:normal}
+body.pi.pb-v9.pricing-page .wow-card.wow-pro{border:2px solid var(--pb-green)!important;padding:23px!important;background:#f6faf3!important}
+body.pi.pb-v9.pricing-page .wow-card>.eyebrow{margin:0 0 12px!important;min-height:2.8em;letter-spacing:.09em!important;overflow-wrap:normal}
+body.pi.pb-v9.pricing-page .wow-card h2{font:400 25px/1.15 Georgia,serif!important;letter-spacing:-.026em!important;min-height:2.3em;margin:0 0 14px!important;text-wrap:balance;overflow-wrap:normal}
+body.pi.pb-v9.pricing-page .wow-card .plan-price-block{margin:0 0 16px;padding:0 0 16px;min-height:116px;border-bottom:1px solid var(--pb-border)}
+body.pi.pb-v9.pricing-page .wow-card .plan-price{display:flex;align-items:baseline;gap:7px;flex-wrap:nowrap;white-space:nowrap;margin:0 0 8px}
+body.pi.pb-v9.pricing-page .wow-card .plan-price .plan-amount{font-size:clamp(42px,3.8vw,56px)!important;flex:0 0 auto;white-space:nowrap}
+body.pi.pb-v9.pricing-page .wow-card .plan-price .plan-currency{font-size:12px!important;flex:0 0 auto;white-space:nowrap;word-break:normal;overflow-wrap:normal}
+body.pi.pb-v9.pricing-page .wow-card .plan-frequency{font-size:13px;font-weight:650;line-height:1.5;margin:0}
+body.pi.pb-v9.pricing-page .wow-card .plan-features{padding:0!important;border-top:0;margin:0 0 20px;gap:11px}
+body.pi.pb-v9.pricing-page .wow-card .plan-features li{padding-left:22px;font-size:14px;line-height:1.55;overflow-wrap:normal;word-break:normal}
+body.pi.pb-v9.pricing-page .wow-card>.pi-small{font-size:12px;line-height:1.6;margin:0 0 16px}
+body.pi.pb-v9.pricing-page .wow-card .plan-action{margin-top:auto}
+body.pi.pb-v9.pricing-page .wow-card .plan-action .btn{display:flex;justify-content:center;align-items:center;min-height:56px;padding:12px 10px;font-size:14px;line-height:1.35;overflow-wrap:normal;word-break:normal}
+body.pi.pb-v9.pricing-page .pricing-terms{max-width:none;margin:24px 0 0}
+body.pi.pb-v9.pricing-page .faqs>details{max-width:840px}
+body.pi.pb-v9.audit-request .nexus-audit-form{max-width:820px;margin-inline:0;padding:clamp(20px,3vw,34px)!important;gap:18px}
+body.pi.pb-v9.audit-request .nexus-audit-form select{min-height:50px;width:100%;padding:12px 14px;font-size:16px;line-height:1.5}
+body.pi.pb-v9.audit-request #draft-controls>button{width:100%}
+body.pi.pb-v9.audit-request #draft-output .hero-ctas{display:grid;grid-template-columns:1fr 1fr}
+body.pi.pb-v9 .pb-app-page #csv-workflow,body.pi.pb-v9 #csv-workflow{scroll-margin-top:24px}
+@media(max-width:1199px){body.pi.pb-v9.pricing-page .wow-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}body.pi.pb-v9.pricing-page .wow-card>.eyebrow{min-height:0}body.pi.pb-v9.pricing-page .wow-card h2{min-height:0}body.pi.pb-v9.pricing-page .wow-card .plan-price-block{min-height:104px}}
+@media(min-width:621px) and (max-width:1199px){body.pi.pb-v9.pricing-page .wow-card h2{min-height:2.3em}}
+@media(max-width:820px){body.pi.pb-v9.v7-home .v7-hero-grid{grid-template-columns:minmax(0,1fr)}body.pi.pb-v9.v7-home .pi-hero h1{font-size:clamp(36px,9vw,54px)}}
+@media(max-width:760px){body.pi.pb-v9:not(.v7-home) main>section:is(.page-head,.pi-inner-hero){padding-block:32px!important}body.pi.pb-v9 .pi-inner-cta{display:grid;grid-template-columns:1fr;gap:10px}body.pi.pb-v9 .pi-inner-cta>a{width:100%}body.pi.pb-v9 .pi-footer nav{gap:24px 16px}body.pi.pb-v9.audit-request #draft-output .hero-ctas{grid-template-columns:1fr}body.pi.pb-v9 .pb-quick-actions>.btn{flex:1 1 100%;width:100%}body.pi.pb-v9 .pb-quick-actions>.pi-text-link{justify-content:center;width:100%}}
+@media(max-width:620px){body.pi.pb-v9.pricing-page .wow-grid{grid-template-columns:minmax(0,1fr);gap:14px}body.pi.pb-v9.pricing-page .wow-card{padding:22px!important}body.pi.pb-v9.pricing-page .wow-card.wow-pro{padding:21px!important}body.pi.pb-v9.pricing-page .wow-card .plan-price-block{min-height:0}body.pi.pb-v9.pricing-page .wow-card h2{font-size:27px!important}body.pi.pb-v9.pricing-page .wow-card .plan-price .plan-amount{font-size:52px!important}}
+/* Keep legal text narrow enough to read without changing wording. */
+body.pi.pb-v9.pb-legal-page main>.section>.wrap>p,body.pi.pb-v9.pb-legal-page main>.section>.wrap>ul,body.pi.pb-v9.pb-legal-page main>.section>.wrap>h2{max-width:76ch}
+
+/* Final visual tuning: show the package comparison sooner. */
+body.pi.pb-v9.v7-home .pb-hero-last{font:inherit;line-height:inherit;letter-spacing:inherit;color:inherit}
+body.pi.pb-v9.v7-home .v7-actions>.v7-text-link{gap:6px}
+body.pi.pb-v9.pricing-page main>.pricing-intro.page-head{padding-block:32px!important}
+body.pi.pb-v9.pricing-page .pricing-intro h1{font-size:clamp(34px,3.8vw,52px)!important;margin:0 0 12px!important;line-height:1.04!important}
+body.pi.pb-v9.pricing-page .pricing-intro .lead{margin:0 0 12px}
+body.pi.pb-v9.pricing-page .pricing-intro .pi-small{margin:0 0 12px}
+body.pi.pb-v9.pricing-page .pricing-intro .pb-quick-actions{margin:12px 0 0}
+body.pi.pb-v9.pricing-page main>.pricing-options{padding-top:36px!important}
+body.pi.pb-v9.pricing-page #packages{scroll-margin-top:24px}
+body.pi.pb-v9.pricing-page .pricing-options .section-title{margin:0 0 10px}
+body.pi.pb-v9.pricing-page .pricing-options .section-lead{margin:0 0 20px}
+body.pi.pb-v9.pricing-page .wow-card>.eyebrow{min-height:1.55em}
+body.pi.pb-v9.pricing-page .wow-card h2{min-height:2.3em}
+body.pi.pb-v9.pricing-page .wow-card .plan-price-block{min-height:96px}
+body.pi.pb-v9.pricing-page .wow-card .plan-features{margin-bottom:18px}
+body.pi.pb-v9.audit-request .nexus-audit-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.pi.pb-v9.audit-request .nexus-audit-form>*{grid-column:1/-1}
+body.pi.pb-v9.audit-request .nexus-audit-form>label[for="draft-date"],body.pi.pb-v9.audit-request .nexus-audit-form>label[for="draft-deadline"]{grid-column:auto}
+body.pi.pb-v9.audit-request main>.page-head{padding-block:32px!important}
+body.pi.pb-v9.audit-request .page-head .lead{margin:0 0 12px}
+body.pi.pb-v9.audit-request .page-head .wrap>.nexus-form-note{margin:12px 0 18px}
+@media(max-width:620px){body.pi.pb-v9.pricing-page main>.pricing-intro.page-head{padding-block:26px!important}body.pi.pb-v9.pricing-page main>.pricing-options{padding-top:26px!important}body.pi.pb-v9.pricing-page .wow-card h2,body.pi.pb-v9.pricing-page .wow-card .plan-price-block{min-height:0}body.pi.pb-v9.audit-request .nexus-audit-form{grid-template-columns:1fr}body.pi.pb-v9.audit-request .nexus-audit-form>label[for="draft-date"],body.pi.pb-v9.audit-request .nexus-audit-form>label[for="draft-deadline"]{grid-column:1/-1}}
